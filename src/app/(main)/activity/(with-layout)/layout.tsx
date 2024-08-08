@@ -6,8 +6,8 @@ import {
 
 import { getSemesters } from '@/service/server/semester'
 
-import { ActivitySection } from './_components/ActivitySection'
-import { SemesterSection } from './_components/SemesterSection'
+import { ActivitySection } from '../_components/ActivitySection'
+import { SemesterSection } from '../_components/SemesterSection'
 
 const ActivityLayout = async ({ children }: { children: React.ReactNode }) => {
   const queryClient = new QueryClient()
