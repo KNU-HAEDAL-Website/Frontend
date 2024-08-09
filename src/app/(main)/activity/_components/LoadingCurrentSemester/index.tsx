@@ -2,12 +2,12 @@
 
 import { useSemesterStore } from '~activity/_store/semester'
 
-import { SelectActivity } from './SelectActivity'
+import { ActivitySection } from './ActivitySection'
 
-export const ActivitySection = () => {
+export const LoadingCurrentSemester = () => {
   const currentSemester = useSemesterStore((state) => state.currentSemester)
 
   if (!currentSemester) return <div>loading...</div>
 
-  return <SelectActivity semesterId={currentSemester.semesterId} />
+  return <ActivitySection semesterId={currentSemester.semesterId} />
 }

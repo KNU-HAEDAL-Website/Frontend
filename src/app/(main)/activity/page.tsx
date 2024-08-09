@@ -6,10 +6,10 @@ import {
 
 import { getSemesters } from '@/service/server/semester'
 
-import { ActivitySection } from '../_components/ActivitySection'
-import { SemesterSection } from '../_components/SemesterSection'
+import { LoadingCurrentSemester } from './_components/LoadingCurrentSemester'
+import { SemesterSection } from './_components/SemesterSection'
 
-const ActivityLayout = async ({ children }: { children: React.ReactNode }) => {
+const ActivityPage = async () => {
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
@@ -21,11 +21,10 @@ const ActivityLayout = async ({ children }: { children: React.ReactNode }) => {
     <div className="flex flex-col gap-2">
       <HydrationBoundary state={dehydrate(queryClient)}>
         <SemesterSection />
-        <ActivitySection />
-        {children}
+        <LoadingCurrentSemester />
       </HydrationBoundary>
     </div>
   )
 }
 
-export default ActivityLayout
+export default ActivityPage

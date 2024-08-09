@@ -13,10 +13,12 @@ export const SemesterSection = () => {
   const { currentSemester, setCurrentSemester } = useSemesterStore()
 
   useEffect(() => {
-    if (status === 'success' && !currentSemester) {
-      setCurrentSemester(semesters[semesters.length - 1])
+    if (status === 'success') {
+      if (currentSemester?.semesterName === 'init') {
+        setCurrentSemester(semesters[semesters.length - 1])
+      }
     }
-  }, [status, currentSemester, setCurrentSemester])
+  }, [status, setCurrentSemester])
 
   return <SemesterList semesters={semesters} />
 }
