@@ -7,7 +7,7 @@ import {
 } from '@radix-ui/react-icons'
 import Link from 'next/link'
 
-import { ButtonProps, buttonVariants } from '@/components/ui/button'
+import { Button, ButtonProps, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
@@ -64,20 +64,20 @@ const PaginationLink = ({
 )
 PaginationLink.displayName = 'PaginationLink'
 
+type PaginationButtonProps = {
+  isActive?: boolean
+  disabled?: boolean
+} & React.HTMLAttributes<HTMLButtonElement>
+
 const PaginationButton = ({
   className,
   isActive,
   ...props
-}: PaginationLinkProps) => (
-  <Link
+}: PaginationButtonProps) => (
+  <Button
     aria-current={isActive ? 'page' : undefined}
-    className={cn(
-      buttonVariants({
-        variant: isActive ? 'outline' : 'ghost',
-      }),
-      'h-8 w-8 p-0 text-sm',
-      className,
-    )}
+    variant={isActive ? 'outline' : 'ghost'}
+    className={cn('h-8 w-8 p-0 text-sm', className)}
     {...props}
   />
 )

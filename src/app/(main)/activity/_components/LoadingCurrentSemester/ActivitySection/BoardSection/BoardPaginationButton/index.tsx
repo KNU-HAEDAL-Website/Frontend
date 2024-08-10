@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react'
+
 import {
   Pagination,
   PaginationButton,
@@ -6,37 +8,55 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
-import { PageInfo } from '@/service/types/paging'
+import { BoardsResponse } from '@/service/server/board'
 
 type BoardPaginationButtonProps = {
-  pageInfo?: PageInfo
+  boardData?: BoardsResponse
+  currentPage: number
+  setCurrentPage: Dispatch<SetStateAction<number>>
 }
 
 export const BoardPaginationButton = ({
-  pageInfo,
+  boardData,
+  currentPage,
+  setCurrentPage,
 }: BoardPaginationButtonProps) => {
-  if (!pageInfo) return null
+  if (!boardData) return null
 
-  const pages = createPageNumber(pageInfo.totalPages)
+  const pages = createPageNumber(boardData.pageInfo.totalPages)
 
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#" />
+          <PaginationPrevious
+            href="#"
+            onClick={(e) => {
+              e.preventDefault()
+              setCurrentPage((old) => Math.max(old - 1, 0))
+            }}
+            disabled={currentPage === 0}
+          />
         </PaginationItem>
         {pages.map((page) => (
           <PaginationItem key={page}>
             <PaginationButton
-              href="#"
-              isActive={pageInfo.pageNumber + 1 === page}
+              onClick={() => setCurrentPage(page - 1)}
+              isActive={currentPage + 1 === page}
             >
               {page}
             </PaginationButton>
           </PaginationItem>
         ))}
         <PaginationItem>
-          <PaginationNext href="#" />
+          <PaginationNext
+            href="#"
+            onClick={(e) => {
+              e.preventDefault()
+              setCurrentPage((old) => (boardData.nextPageToken ? old + 1 : old))
+            }}
+            disabled={currentPage === boardData.pageInfo.totalPages - 1}
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

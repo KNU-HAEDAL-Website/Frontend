@@ -37,7 +37,6 @@ export type PagaingRaw = {
 export type PageInfo = {
   totalPages: number
   totalElements: number
-  pageNumber: number
 }
 
 export type Paging = {

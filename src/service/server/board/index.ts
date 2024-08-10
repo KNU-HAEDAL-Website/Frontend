@@ -4,7 +4,7 @@ import { Board } from '@/types/activity'
 
 type BoardsPagingRequestParams = {
   activityId: number
-  page?: string
+  page?: number
   size?: number
 }
 
@@ -12,7 +12,7 @@ interface BoardsPagingResponseRaw extends PagaingRaw {
   content: Board[]
 }
 
-interface BoardsResponse extends Paging {
+export interface BoardsResponse extends Paging {
   boards: Board[]
 }
 
@@ -34,7 +34,6 @@ export const getBoardsPaging = async (
     pageInfo: {
       totalPages: data.totalPages,
       totalElements: data.totalElements,
-      pageNumber: data.pageable.pageNumber,
     },
   }
 }
@@ -46,7 +45,7 @@ const getBoardsPath = ({
 }: BoardsPagingRequestParams) => {
   const params = new URLSearchParams()
 
-  if (page) params.append('page', page)
+  if (page) params.append('page', page.toString())
   if (size) params.append('size', size.toString())
 
   return `/activities/${activityId}/boards?${params.toString()}`
