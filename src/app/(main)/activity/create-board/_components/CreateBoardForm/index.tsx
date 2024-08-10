@@ -5,25 +5,35 @@ import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAction } from 'next-safe-action/hooks'
+import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
+import { useToast } from '@/components/ui/use-toast'
 import { CreateBoard, CreateBoardSchema } from '@/schema/board'
-import { postImageUrlAction } from '@/service/server/board/post-image-url'
+import { createBoardAction } from '@/service/server/board/create-board'
 
 import { CreateBoardFileField, CreateBoardInputField } from './CreateBoardField'
 import { SelectMemberField } from './SelectMemberField'
 
-export const CreateBoardForm = () => {
+type CreateBoardFromProps = {
+  activityId: number
+}
+
+export const CreateBoardForm = ({ activityId }: CreateBoardFromProps) => {
+  const router = useRouter()
+
   const {
-    execute: postImageUrl,
-    result: postImageUrlResult,
+    execute: createBoard,
+    result,
     isExecuting,
-  } = useAction(postImageUrlAction)
+  } = useAction(createBoardAction)
+  const { toast } = useToast()
 
   const form = useForm<CreateBoard>({
     resolver: zodResolver(CreateBoardSchema),
     defaultValues: {
+      activityId,
       boardName: '',
       boardIntro: '',
       imageFile: new File([], ''),
@@ -32,12 +42,17 @@ export const CreateBoardForm = () => {
   })
 
   useEffect(() => {
-    if (postImageUrlResult.data) {
+    if (result.data) {
+      toast({
+        title: result.data.message,
+        duration: 3000,
+      })
+      router.push('/activity')
     }
-  })
+  }, [result])
 
-  const onSubmit = () => {
-    postImageUrl({ imageFile: form.getValues('imageFile') })
+  const onSubmit = (form: CreateBoard) => {
+    createBoard(form)
   }
 
   return (
@@ -59,9 +74,11 @@ export const CreateBoardForm = () => {
         />
         <CreateBoardFileField name="imageFile" label="게시판 대표 사진" />
         <SelectMemberField name="participants" label="게시판 이용자" />
-        <Button type="submit" disabled={isExecuting}>
-          테스트
-        </Button>
+        <div className="flex justify-end">
+          <Button type="submit" disabled={isExecuting}>
+            게시판 생성하기
+          </Button>
+        </div>
       </form>
     </Form>
   )

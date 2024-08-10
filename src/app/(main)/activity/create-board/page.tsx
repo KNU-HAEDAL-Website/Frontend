@@ -20,7 +20,7 @@ const CreateBoardPage = () => {
         semesterName={currentSemester.semesterName}
         activityName={currentActivity.activityName}
       />
-      <CreateBoardForm />
+      <CreateBoardForm activityId={currentActivity.activityId} />
     </div>
   )
 }
