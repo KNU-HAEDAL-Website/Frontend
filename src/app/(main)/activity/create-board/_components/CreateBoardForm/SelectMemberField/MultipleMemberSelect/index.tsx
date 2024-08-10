@@ -13,12 +13,12 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command'
-import { ActiveUser } from '@/types/user'
+import { User } from '@/types/user'
 
 type MultipleMemberSelectProps = {
-  options: ActiveUser[]
-  value: ActiveUser[]
-  onChange: (value: ActiveUser[]) => void
+  options: User[]
+  value: User[]
+  onChange: (value: User[]) => void
   updateField: (value: string[]) => void
 }
 
@@ -35,7 +35,7 @@ export const MultipleMemberSelect = ({
     updateField(field)
   }, [value])
 
-  const selectMember = (member: ActiveUser) => {
+  const selectMember = (member: User) => {
     if (value.includes(member)) {
       onChange(value.filter((m) => m.userId !== member.userId))
     } else {

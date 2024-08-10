@@ -1,10 +1,8 @@
 import { AUTHORIZATION_API } from '@/service/config'
-import { ActiveUser } from '@/types/user'
+import { User } from '@/types/user'
 
-export const getActiveUser = async () => {
-  const response = await AUTHORIZATION_API.get<ActiveUser[]>(
-    '/admin/users/active',
-  )
+export const getUsers = async () => {
+  const response = await AUTHORIZATION_API.get<User[]>('/private/users')
 
   return response.data
 }

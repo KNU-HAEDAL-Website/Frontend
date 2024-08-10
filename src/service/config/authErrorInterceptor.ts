@@ -36,10 +36,6 @@ const authErrorInterceptor = async (error: AxiosError) => {
         return Promise.reject(reissueError)
       }
     }
-
-    if (status === 404) {
-      clearAccessToken()
-    }
   }
 
   return Promise.reject(error)

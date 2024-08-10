@@ -1,16 +1,16 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { getActiveUser } from '@/service/server/user'
+import { getUsers } from '@/service/server/user'
 
-export const useGetActiveUsers = () => {
+export const useGetUsers = () => {
   const {
-    data: activeUsers,
+    data: users,
     status,
     error,
   } = useQuery({
     queryKey: ['users', 'active'],
-    queryFn: async () => getActiveUser(),
+    queryFn: async () => getUsers(),
   })
 
-  return { activeUsers, status, error }
+  return { users, status, error }
 }
