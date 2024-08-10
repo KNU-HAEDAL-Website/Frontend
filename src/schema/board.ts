@@ -11,6 +11,7 @@ export const CreateBoardSchema = z.object({
   imageUrl: z.instanceof(File).refine((f) => f.size < 5000000, {
     message: '파일 크기는 5MB 이하만 가능합니다.',
   }),
+  participants: z.string().array(),
 })
 
 export type CreateBoard = z.infer<typeof CreateBoardSchema>

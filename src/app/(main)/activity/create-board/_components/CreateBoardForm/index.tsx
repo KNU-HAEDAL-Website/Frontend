@@ -9,6 +9,7 @@ import { Form } from '@/components/ui/form'
 import { CreateBoard, CreateBoardSchema } from '@/schema/board'
 
 import { CreateBoardFileField, CreateBoardInputField } from './CreateBoardField'
+import { SelectMemberField } from './SelectMemberField'
 
 export const CreateBoardForm = () => {
   const form = useForm<CreateBoard>({
@@ -17,6 +18,7 @@ export const CreateBoardForm = () => {
       boardName: '',
       boardIntro: '',
       imageUrl: new File([], ''),
+      participants: [],
     },
   })
 
@@ -27,7 +29,7 @@ export const CreateBoardForm = () => {
   return (
     <Form {...form}>
       <form
-        className="flex flex-col gap-4"
+        className="flex flex-col gap-4 pb-10"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <CreateBoardInputField
@@ -42,6 +44,7 @@ export const CreateBoardForm = () => {
           placeholder="게시판 소개글을 작성해주세요"
         />
         <CreateBoardFileField name="imageUrl" label="게시판 대표 사진" />
+        <SelectMemberField name="participants" label="게시판 이용자" />
         <Button type="submit">테스트</Button>
       </form>
     </Form>
