@@ -71,7 +71,7 @@ export const CreateBoardFileField = ({
             <Label className="text-md w-40">{label}</Label>
             <FormControl className="h-8 cursor-pointer">
               <Input
-                accept=".png, .jpeg"
+                accept=".jpg, .jpeg"
                 type="file"
                 multiple={false}
                 onChange={(e) =>

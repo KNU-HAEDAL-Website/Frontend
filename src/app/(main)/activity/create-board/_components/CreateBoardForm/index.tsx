@@ -1,29 +1,43 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useAction } from 'next-safe-action/hooks'
 
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { CreateBoard, CreateBoardSchema } from '@/schema/board'
+import { postImageUrlAction } from '@/service/server/board/post-image-url'
 
 import { CreateBoardFileField, CreateBoardInputField } from './CreateBoardField'
 import { SelectMemberField } from './SelectMemberField'
 
 export const CreateBoardForm = () => {
+  const {
+    execute: postImageUrl,
+    result: postImageUrlResult,
+    isExecuting,
+  } = useAction(postImageUrlAction)
+
   const form = useForm<CreateBoard>({
     resolver: zodResolver(CreateBoardSchema),
     defaultValues: {
       boardName: '',
       boardIntro: '',
-      imageUrl: new File([], ''),
+      imageFile: new File([], ''),
       participants: [],
     },
   })
 
-  const onSubmit = (values: CreateBoard) => {
-    console.log(values)
+  useEffect(() => {
+    if (postImageUrlResult.data) {
+    }
+  })
+
+  const onSubmit = () => {
+    postImageUrl({ imageFile: form.getValues('imageFile') })
   }
 
   return (
@@ -43,9 +57,11 @@ export const CreateBoardForm = () => {
           type="textarea"
           placeholder="게시판 소개글을 작성해주세요"
         />
-        <CreateBoardFileField name="imageUrl" label="게시판 대표 사진" />
+        <CreateBoardFileField name="imageFile" label="게시판 대표 사진" />
         <SelectMemberField name="participants" label="게시판 이용자" />
-        <Button type="submit">테스트</Button>
+        <Button type="submit" disabled={isExecuting}>
+          테스트
+        </Button>
       </form>
     </Form>
   )

@@ -1,4 +1,4 @@
-import { BACKEND_API } from '@/service/config'
+import { AUTHORIZATION_API, BACKEND_API } from '@/service/config'
 import { PagaingRaw, Paging } from '@/service/types/paging'
 import { Board } from '@/types/activity'
 
@@ -49,4 +49,17 @@ const getBoardsPath = ({
   if (size) params.append('size', size.toString())
 
   return `/activities/${activityId}/boards?${params.toString()}`
+}
+
+type generatePresignedUrlResposne = {
+  preSignedUrl: string
+  imageUrl: string
+}
+
+export const generatePresignedUrl = async () => {
+  const response = await AUTHORIZATION_API.get<generatePresignedUrlResposne>(
+    '/boards/generate-presigned-url',
+  )
+
+  return response.data
 }
