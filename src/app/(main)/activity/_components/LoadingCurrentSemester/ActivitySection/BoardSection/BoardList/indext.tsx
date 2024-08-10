@@ -31,8 +31,14 @@ export const BoardList = ({ boards }: BoardListProps) => {
               <CardTitle className="text-md md:text-lg">
                 {board.boardName}
               </CardTitle>
-              <div className="flex items-center gap-1">
-                <NameLabel name={board.participants[0].userName} />
+              <div className="flex flex-wrap items-center gap-1">
+                {board.participants.map((participant) => (
+                  <NameLabel
+                    className="min-w-fit"
+                    key={participant.userId}
+                    name={participant.userName}
+                  />
+                ))}
               </div>
             </div>
             <CardContent className="text-xs text-primary/70 md:text-sm">

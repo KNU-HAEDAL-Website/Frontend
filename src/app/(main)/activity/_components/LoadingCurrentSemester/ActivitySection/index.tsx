@@ -32,12 +32,14 @@ export const ActivitySection = ({ semesterId }: ActivitySectionProps) => {
   if (!activities?.length) return <div>활동이 없습니다.</div>
 
   return (
-    <div className="flex w-screen flex-col px-12 sm:px-20 md:max-w-screen-lg">
+    <div className="flex w-screen flex-col gap-6 px-12 sm:px-20 md:max-w-screen-lg">
       <ActivityList activities={activities} />
       <BoardSection />
-      <Link href="/activity/create-board" className="flex justify-end">
-        <Button className="max-w-fit">게시판 생성하기</Button>
-      </Link>
+      <div className="mb-20 flex justify-end">
+        <Link href="/activity/create-board">
+          <Button className="max-w-fit">게시판 생성하기</Button>
+        </Link>
+      </div>
     </div>
   )
 }
