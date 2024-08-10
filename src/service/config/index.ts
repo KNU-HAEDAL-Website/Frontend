@@ -14,10 +14,10 @@ const AUTHORIZATION_API = initInstance({
 
 AUTHORIZATION_API.interceptors.request.use(
   (request) => {
-    const { accessToken } = useAuthStore()
+    const accessToken = useAuthStore.getState().accessToken
 
     if (accessToken) {
-      request.headers.Authorization = `Bearer ${accessToken}`
+      request.headers.Authorization = accessToken
     }
 
     return request

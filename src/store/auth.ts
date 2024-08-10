@@ -1,6 +1,5 @@
 import { create } from 'zustand'
-
-import LocalStorage from '@/lib/local-storage'
+import { persist } from 'zustand/middleware'
 
 interface AuthProps {
   accessToken: string | null
@@ -9,15 +8,20 @@ interface AuthProps {
   isLoggedIn: () => boolean
 }
 
-export const useAuthStore = create<AuthProps>((set) => ({
-  accessToken: LocalStorage.getItem('accessToken') || null,
-  setAccessToken: (token) => {
-    LocalStorage.setItem('accessToken', token)
-    set({ accessToken: token })
-  },
-  clearAccessToken: () => {
-    LocalStorage.removeItem('accessToken')
-    set({ accessToken: null })
-  },
-  isLoggedIn: () => !!LocalStorage.getItem('accessToken'),
-}))
+export const useAuthStore = create(
+  persist<AuthProps>(
+    (set, get) => ({
+      accessToken: null,
+      setAccessToken: (token) => {
+        set({ accessToken: token })
+      },
+      clearAccessToken: () => {
+        set({ accessToken: null })
+      },
+      isLoggedIn: () => !!get().accessToken,
+    }),
+    {
+      name: 'access-token',
+    },
+  ),
+)

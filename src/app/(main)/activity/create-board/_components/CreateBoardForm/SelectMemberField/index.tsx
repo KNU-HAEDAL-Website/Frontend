@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -8,30 +10,10 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Label } from '@/components/ui/label'
+import { useGetActiveUsers } from '@/service/data/user'
 import { ActiveUser } from '@/types/user'
 
 import { MultipleMemberSelect } from './MultipleMemberSelect'
-
-const test: ActiveUser[] = [
-  {
-    userId: '0',
-    studentNumber: 202012312312,
-    userName: '김아진',
-    role: '일반',
-  },
-  {
-    userId: '1',
-    studentNumber: 202012312313,
-    userName: '조대성',
-    role: '해구르르',
-  },
-  {
-    userId: '2',
-    studentNumber: 202012312314,
-    userName: '김강민',
-    role: '팀장',
-  },
-]
 
 type SelectMemberFieldProps = {
   name: string
@@ -39,8 +21,13 @@ type SelectMemberFieldProps = {
 }
 
 export const SelectMemberField = ({ name, label }: SelectMemberFieldProps) => {
+  const { activeUsers, status } = useGetActiveUsers()
+
   const form = useFormContext()
   const [selectedMember, setSelectedMember] = useState<ActiveUser[]>([])
+
+  if (status === 'pending') return <div>loading...</div>
+  if (!activeUsers) return <div>?</div>
 
   return (
     <FormField
@@ -52,7 +39,7 @@ export const SelectMemberField = ({ name, label }: SelectMemberFieldProps) => {
             <Label className="text-md w-40">{label}</Label>
             <FormControl className="h-8 cursor-pointer">
               <MultipleMemberSelect
-                options={test}
+                options={activeUsers}
                 onChange={(members) => setSelectedMember(members)}
                 value={selectedMember}
                 updateField={(values) => field.onChange(values)}
