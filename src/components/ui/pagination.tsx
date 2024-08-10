@@ -64,6 +64,25 @@ const PaginationLink = ({
 )
 PaginationLink.displayName = 'PaginationLink'
 
+const PaginationButton = ({
+  className,
+  isActive,
+  ...props
+}: PaginationLinkProps) => (
+  <Link
+    aria-current={isActive ? 'page' : undefined}
+    className={cn(
+      buttonVariants({
+        variant: isActive ? 'outline' : 'ghost',
+      }),
+      'h-8 w-8 p-0 text-sm',
+      className,
+    )}
+    {...props}
+  />
+)
+PaginationButton.displayName = 'PaginationButton'
+
 const PaginationPrevious = ({
   className,
   disabled = false,
@@ -126,4 +145,5 @@ export {
   PaginationPrevious,
   PaginationNext,
   PaginationEllipsis,
+  PaginationButton,
 }

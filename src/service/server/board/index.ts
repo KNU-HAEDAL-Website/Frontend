@@ -34,6 +34,7 @@ export const getBoardsPaging = async (
     pageInfo: {
       totalPages: data.totalPages,
       totalElements: data.totalElements,
+      pageNumber: data.pageable.pageNumber,
     },
   }
 }

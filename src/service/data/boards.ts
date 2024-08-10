@@ -22,6 +22,7 @@ export const useGetBoardsPaging = ({
   })
 
   const boards = data?.pages.flatMap((page) => page.boards)
+  const pageInfo = data?.pages.flatMap((page) => page.pageInfo)[0]
 
-  return { boards, status, error, fetchNextPage, hasNextPage }
+  return { boards, pageInfo, status, error, fetchNextPage, hasNextPage }
 }

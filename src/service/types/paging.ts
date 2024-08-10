@@ -34,10 +34,13 @@ export type PagaingRaw = {
   empty: boolean
 }
 
+export type PageInfo = {
+  totalPages: number
+  totalElements: number
+  pageNumber: number
+}
+
 export type Paging = {
   nextPageToken?: string
-  pageInfo: {
-    totalPages: number
-    totalElements: number
-  }
+  pageInfo: PageInfo
 }
