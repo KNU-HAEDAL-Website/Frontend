@@ -11,9 +11,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           <Header />
         </Content>
       </div>
-      <div className="mt-16 flex-1">
-        <Content>{children}</Content>
-      </div>
+      <div className="mt-16 flex flex-1 flex-col items-center">{children}</div>
       <div className="bg-slate-100 text-primary">
         <Content>
           <Footer />

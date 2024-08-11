@@ -18,7 +18,7 @@ const ActivityPage = async () => {
   })
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex w-full max-w-screen-lg flex-col gap-2 px-12 sm:px-20">
       <HydrationBoundary state={dehydrate(queryClient)}>
         <SemesterSection />
         <LoadingCurrentSemester />

@@ -29,7 +29,7 @@ export const BoardList = ({ boards }: BoardListProps) => {
                 alt={board.boardName}
               />
             </div>
-            <div className="flex flex-col">
+            <div className="flex min-w-fit flex-col md:min-w-80">
               <div className="flex flex-row gap-4 px-6 py-2 sm:flex-col sm:items-start sm:gap-2 lg:flex-row lg:gap-4">
                 <CardTitle className="text-md md:text-lg">
                   {board.boardName}

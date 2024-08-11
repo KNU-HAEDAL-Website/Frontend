@@ -40,7 +40,7 @@ export const BoardSection = () => {
   if (!data?.boards?.length) return <div>게시판이 없습니다.</div>
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex w-full flex-col items-center gap-6">
       <BoardList boards={data.boards} />
       <BoardPaginationButton
         boardData={data}
