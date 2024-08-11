@@ -4,7 +4,7 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 
-import { getBoardsPaging } from '@/service/server/board'
+import { getBoardDetail, getBoardsPaging } from '@/service/server/board'
 
 type BoardsParams = {
   activityId: number
@@ -24,4 +24,16 @@ export const useGetBoardsPaging = ({
   })
 
   return { data, status, error, isPlaceholderData }
+}
+
+type BoardDetailParams = {
+  activityId: number
+  boardId: number
+}
+
+export const useBoardDetail = ({ activityId, boardId }: BoardDetailParams) => {
+  return useQuery({
+    queryKey: ['board', activityId, boardId],
+    queryFn: () => getBoardDetail({ activityId, boardId }),
+  })
 }

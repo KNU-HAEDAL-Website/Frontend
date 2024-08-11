@@ -63,3 +63,19 @@ export const generatePresignedUrl = async () => {
 
   return response.data
 }
+
+type BoardDetailRequestParams = {
+  activityId: number
+  boardId: number
+}
+
+export const getBoardDetail = async ({
+  activityId,
+  boardId,
+}: BoardDetailRequestParams) => {
+  const response = await BACKEND_API.get<Board>(
+    `/activities/${activityId}/boards/${boardId}`,
+  )
+
+  return response.data
+}
