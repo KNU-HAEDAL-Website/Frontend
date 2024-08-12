@@ -1,30 +1,24 @@
-import {
-  HydrationBoundary,
-  QueryClient,
-  dehydrate,
-} from '@tanstack/react-query'
+'use client'
 
-import { getSemesters } from '@/service/server/semester'
+import { useEffect } from 'react'
 
-import { LoadingCurrentSemester } from './_components/LoadingCurrentSemester'
-import { SemesterSection } from './_components/SemesterSection'
+import { useRouter } from 'next/navigation'
 
-const ActivityPage = async () => {
-  const queryClient = new QueryClient()
+import { useGetSemesters } from '@/service/data/semester'
 
-  await queryClient.prefetchQuery({
-    queryKey: ['semesters'],
-    queryFn: getSemesters,
-  })
+const RedirectSemester = () => {
+  const router = useRouter()
+  const { semesters } = useGetSemesters()
 
-  return (
-    <div className="flex w-full max-w-screen-lg flex-col gap-2 px-12 sm:px-20">
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <SemesterSection />
-        <LoadingCurrentSemester />
-      </HydrationBoundary>
-    </div>
-  )
+  useEffect(() => {
+    if (semesters && semesters.length > 0) {
+      const lastSemester = semesters[semesters.length - 1].semesterName
+
+      router.push(`/activity/${lastSemester}`)
+    }
+  }, [semesters, router])
+
+  return <div className="w-full">loading...</div>
 }
 
-export default ActivityPage
+export default RedirectSemester

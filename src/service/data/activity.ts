@@ -1,5 +1,6 @@
 import { queryOptions, useQuery } from '@tanstack/react-query'
 
+import { DATA_ERROR } from '@/constant/errorMessage'
 import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { getActivities } from '@/service/server/activity'
 
@@ -20,6 +21,10 @@ export const useCurrentActivity = (semesterId: number, activityId: number) => {
   const currentActivity = activities?.find(
     (activity) => activity.activityId === activityId,
   )
+
+  if (!currentActivity) {
+    throw new Error(DATA_ERROR.ACTIVITY_NOT_FOUND)
+  }
 
   return currentActivity
 }

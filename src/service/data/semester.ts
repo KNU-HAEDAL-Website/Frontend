@@ -1,13 +1,18 @@
-import { useQuery } from '@tanstack/react-query'
+import { queryOptions, useQuery } from '@tanstack/react-query'
 
+import { DATA_ERROR } from '@/constant/errorMessage'
+import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { getSemesters } from '@/service/server/semester'
 import { Semester } from '@/types/activity'
 
-export const useGetSemesters = () => {
-  const { data, status } = useQuery({
+const semesterQuery = () =>
+  queryOptions({
     queryKey: ['semesters'],
     queryFn: async () => getSemesters(),
   })
+
+export const useGetSemesters = () => {
+  const { data, status } = useQuery(semesterQuery())
 
   const semesters = data ? convertSemesterFormat(data) : []
 
@@ -25,4 +30,19 @@ const convertSemesterFormat = (semesters: Semester[]): Semester[] => {
       semesterName: `${year}-${term}`,
     }
   })
+}
+
+export const useCurrentSemester = (semesterName: string) => {
+  const { queryKey } = semesterQuery()
+  const semesters = queryClient.getQueryData(queryKey)
+
+  const currentSemester = convertSemesterFormat(semesters || []).find(
+    (semester) => semester.semesterName === semesterName,
+  )
+
+  if (!currentSemester) {
+    throw new Error(DATA_ERROR.SEMESTER_NOT_FOUND)
+  }
+
+  return currentSemester
 }

@@ -6,30 +6,28 @@ import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { useGetBoardsPaging } from '@/service/data/boards'
 import { getBoardsPaging } from '@/service/server/board'
 
-import { useActivityStore } from '~activity/_store/activity'
-
 import { BoardList } from './BoardList/indext'
 import { BoardPaginationButton } from './BoardPaginationButton'
 
-export const BoardSection = () => {
-  const currentActivity = useActivityStore((state) => state.currentActivity)
+type BoardSectionProps = {
+  activityId: number
+}
 
-  if (!currentActivity) return <div>에러 처리하기</div>
-
+export const BoardSection = ({ activityId }: BoardSectionProps) => {
   const [page, setPage] = useState(0)
 
   const { data, status, isPlaceholderData } = useGetBoardsPaging({
-    activityId: currentActivity.activityId,
+    activityId: activityId,
     page,
   })
 
   useEffect(() => {
     if (!isPlaceholderData && data?.nextPageToken) {
       queryClient.prefetchQuery({
-        queryKey: ['boards', currentActivity, page + 1],
+        queryKey: ['boards', activityId, page + 1],
         queryFn: () =>
           getBoardsPaging({
-            activityId: currentActivity.activityId,
+            activityId: activityId,
             page: page + 1,
           }),
       })

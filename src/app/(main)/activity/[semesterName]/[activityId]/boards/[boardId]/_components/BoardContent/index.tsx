@@ -20,7 +20,7 @@ export const BoardContent = ({ boardId, activityId }: BoardPageProps) => {
   if (!boardDetail) return <div>게시판 정보가 없습니다.</div>
 
   return (
-    <div className="flex w-full flex-col gap-10 px-8 pt-10 md:px-20">
+    <div className="flex w-full flex-col gap-10 pt-10">
       <BoardHero board={boardDetail} />
       <CreatePostButton boardId={boardId} />
     </div>

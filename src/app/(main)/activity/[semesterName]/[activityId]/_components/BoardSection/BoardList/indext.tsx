@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import { NameLabel } from '@/components/NameLabel'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
@@ -10,12 +11,14 @@ type BoardListProps = {
 }
 
 export const BoardList = ({ boards }: BoardListProps) => {
+  const pathName = usePathname()
+
   return (
     <div className="grid w-full grid-cols-1 place-items-center gap-10 sm:grid-cols-2 md:grid-cols-1">
       {boards.map((board) => (
         <Link
           key={board.boardId}
-          href={`/activity/boards/${board.boardId}`}
+          href={`${pathName}/boards/${board.boardId}`}
           className="w-full"
         >
           <Card className="flex w-full flex-col rounded-none border-none md:flex-row">

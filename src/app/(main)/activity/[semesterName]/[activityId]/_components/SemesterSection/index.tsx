@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Pagination,
   PaginationContent,
@@ -5,33 +7,24 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
+import { useCurrentSemester, useGetSemesters } from '@/service/data/semester'
 import { Semester } from '@/types/activity'
-
-import { useSemesterStore } from '~activity/_store/semester'
 
 import { SemesterButton } from './SemesterButton'
 
-type SemesterListProps = {
-  semesters: Semester[]
+type SemesterSectionProps = {
+  semesterName: string
 }
 
-export const SemesterList = ({ semesters }: SemesterListProps) => {
-  const { currentSemester, setCurrentSemester } = useSemesterStore()
+export const SemesterSection = ({ semesterName }: SemesterSectionProps) => {
+  const { semesters } = useGetSemesters()
+  const currentSemester = useCurrentSemester(semesterName)
 
-  const onClickPreviousButton = () => {
-    const index = currentSemester?.index ?? 0
-    const previousIndex = index > 0 ? index - 1 : 0
-
-    setCurrentSemester(semesters[previousIndex])
-  }
-
-  const onClickNextButton = () => {
-    const index = currentSemester?.index ?? semesters.length - 1
-    const nextIndex =
-      index < semesters.length - 1 ? index + 1 : semesters.length - 1
-
-    setCurrentSemester(semesters[nextIndex])
-  }
+  const previousIndex = Math.max((currentSemester.index ?? 0) - 1, 0)
+  const nextIndex = Math.min(
+    (currentSemester.index ?? semesters.length - 1) + 1,
+    semesters.length - 1,
+  )
 
   const visibleSemesters = getVisibleSemesterList(semesters, currentSemester)
 
@@ -40,20 +33,22 @@ export const SemesterList = ({ semesters }: SemesterListProps) => {
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            href="/activity"
-            onClick={onClickPreviousButton}
+            href={`/activity/${semesters[previousIndex].semesterName}`}
             disabled={currentSemester?.index === 0}
           />
         </PaginationItem>
         <PaginationItem>
           {visibleSemesters?.map((semester) => (
-            <SemesterButton key={semester.semesterId} semester={semester} />
+            <SemesterButton
+              key={semester.semesterId}
+              semester={semester}
+              currentSemester={currentSemester}
+            />
           ))}
         </PaginationItem>
         <PaginationItem>
           <PaginationNext
-            href="/activity"
-            onClick={onClickNextButton}
+            href={`/activity/${semesters[nextIndex].semesterName}`}
             disabled={currentSemester?.index === semesters.length - 1}
           />
         </PaginationItem>

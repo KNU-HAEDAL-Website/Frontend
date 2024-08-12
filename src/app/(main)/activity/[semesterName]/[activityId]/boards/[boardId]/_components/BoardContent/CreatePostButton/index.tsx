@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 
@@ -7,9 +8,11 @@ type CreatePostButtonProps = {
 }
 
 export const CreatePostButton = ({ boardId }: CreatePostButtonProps) => {
+  const pathName = usePathname()
+
   return (
     <div className="mb-20 flex justify-end">
-      <Link href={`/activity/boards/${boardId}/create-post`}>
+      <Link href={`${pathName}/create-post`}>
         <Button className="max-w-fit">게시글 생성하기</Button>
       </Link>
     </div>
