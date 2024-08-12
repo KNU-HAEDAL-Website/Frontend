@@ -9,8 +9,8 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
 
-type NavLink = {
-  index: number
+export type NavLink = {
+  index?: number
   link: string
   name: string
 }
