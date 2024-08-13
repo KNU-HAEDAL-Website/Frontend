@@ -12,13 +12,13 @@ type BoardHeroProps = {
 export const BoardHero = ({ board }: BoardHeroProps) => {
   return (
     <div className="flex flex-col">
-      <Seperator className="bg-primary/40" />
+      <Seperator variant="dark" />
       <ActivityBreadcrumb
         navLinks={[]}
         pageName={`${board.boardName} 게시판`}
       />
       <BoardDetail board={board} />
-      <Seperator className="bg-primary/40" />
+      <Seperator variant="dark" />
     </div>
   )
 }
