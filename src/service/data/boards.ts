@@ -1,9 +1,7 @@
-import {
-  keepPreviousData,
-  useInfiniteQuery,
-  useQuery,
-} from '@tanstack/react-query'
+import { keepPreviousData, queryOptions, useQuery } from '@tanstack/react-query'
 
+import { DATA_ERROR } from '@/constant/errorMessage'
+import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { getBoardDetail, getBoardsPaging } from '@/service/server/board'
 
 type BoardsParams = {
@@ -31,9 +29,27 @@ type BoardDetailParams = {
   boardId: number
 }
 
-export const useBoardDetail = ({ activityId, boardId }: BoardDetailParams) => {
-  return useQuery({
+const boardDetailQuery = (activityId: number, boardId: number) =>
+  queryOptions({
     queryKey: ['board', activityId, boardId],
-    queryFn: () => getBoardDetail({ activityId, boardId }),
+    queryFn: async () => getBoardDetail({ activityId, boardId }),
   })
+
+export const useBoardDetail = ({ activityId, boardId }: BoardDetailParams) => {
+  return useQuery(boardDetailQuery(activityId, boardId))
+}
+
+export const useCurrentBoardDetail = ({
+  activityId,
+  boardId,
+}: BoardDetailParams) => {
+  const { queryKey } = boardDetailQuery(activityId, boardId)
+
+  const boardDetail = queryClient.getQueryData(queryKey)
+
+  if (!boardDetail) {
+    throw new Error(DATA_ERROR.BOARD_DETAIL_NOT_FOUND)
+  }
+
+  return boardDetail
 }
