@@ -1,3 +1,4 @@
+import { CreatePostForm } from './_components/CreatePostForm'
 import { CreatePostHero } from './_components/CreatePostHero'
 
 type CreatePostPageParams = {
@@ -14,6 +15,7 @@ const CreatePostPage = ({ params }: CreatePostPageParams) => {
         activityId={Number(params.activityId)}
         boardId={Number(params.boardId)}
       />
+      <CreatePostForm />
     </div>
   )
 }
