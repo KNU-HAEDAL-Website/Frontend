@@ -29,10 +29,11 @@ type BoardDetailParams = {
   boardId: number
 }
 
-const boardDetailQuery = (activityId: number, boardId: number) =>
+export const boardDetailQuery = (activityId: number, boardId: number) =>
   queryOptions({
     queryKey: ['board', activityId, boardId],
     queryFn: async () => getBoardDetail({ activityId, boardId }),
+    staleTime: 1000 * 60,
   })
 
 export const useBoardDetail = ({ activityId, boardId }: BoardDetailParams) => {

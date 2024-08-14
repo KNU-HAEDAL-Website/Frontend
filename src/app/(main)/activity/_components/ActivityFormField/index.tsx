@@ -1,9 +1,5 @@
 import { ReactNode } from 'react'
-import {
-  ControllerRenderProps,
-  FieldValues,
-  useFormContext,
-} from 'react-hook-form'
+import { ControllerRenderProps, useFormContext } from 'react-hook-form'
 
 import {
   FormControl,
@@ -16,7 +12,7 @@ import { Label } from '@/components/ui/label'
 type CreateBoardInputFieldProps = {
   name: string
   label: string
-  children: (field: ControllerRenderProps<FieldValues, string>) => ReactNode
+  children: (field: ControllerRenderProps) => ReactNode
 }
 
 export const ActivityFormField = ({

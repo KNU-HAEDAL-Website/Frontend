@@ -9,7 +9,7 @@ type CreatePostPageParams = {
 
 const CreatePostPage = ({ params }: CreatePostPageParams) => {
   return (
-    <div className="pt-10">
+    <div className="gap-10">
       <CreatePostHero
         activityId={Number(params.activityId)}
         boardId={Number(params.boardId)}
