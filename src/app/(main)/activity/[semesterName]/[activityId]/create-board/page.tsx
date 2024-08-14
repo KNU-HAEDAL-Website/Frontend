@@ -28,7 +28,7 @@ const CreateBoardPage = ({ params }: CreateBoardPageParams) => {
         semesterName={params.semesterName}
         activityName={currentActivity.activityName}
       />
-      <CreateBoardForm activityId={currentActivity.activityId} />
+      <CreateBoardForm activityId={Number(currentActivity.activityId)} />
     </div>
   )
 }

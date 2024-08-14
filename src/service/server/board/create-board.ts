@@ -41,7 +41,7 @@ export const createBoardAction = actionClient
           { boardName, boardIntro, boardImageUrl: imageUrl, participants },
         )
 
-        return { message: response.data.message }
+        return { isSuccess: true, message: response.data.message }
       } catch (error) {
         if (error instanceof AxiosError) {
           const response = error.response

@@ -9,11 +9,15 @@ import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
 import { CreateBoard, CreateBoardSchema } from '@/schema/board'
 import { createBoardAction } from '@/service/server/board/create-board'
 
-import { CreateBoardFileField, CreateBoardInputField } from './CreateBoardField'
+import { ActivityFormField } from '~activity/_components/ActivityFormField'
+import { ActivityImageInput } from '~activity/_components/ActivityImageInput'
+
 import { SelectMemberField } from './SelectMemberField'
 
 type CreateBoardFromProps = {
@@ -42,7 +46,7 @@ export const CreateBoardForm = ({ activityId }: CreateBoardFromProps) => {
   })
 
   useEffect(() => {
-    if (result.data) {
+    if (result.data?.isSuccess) {
       toast({
         title: result.data.message,
         duration: 3000,
@@ -61,18 +65,19 @@ export const CreateBoardForm = ({ activityId }: CreateBoardFromProps) => {
         className="flex flex-col gap-4 pb-10"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <CreateBoardInputField
-          name="boardName"
-          label="게시판 제목"
-          placeholder="게시판 제목을 입력해주세요"
-        />
-        <CreateBoardInputField
-          name="boardIntro"
-          label="게시판 소개"
-          type="textarea"
-          placeholder="게시판 소개글을 작성해주세요"
-        />
-        <CreateBoardFileField name="imageFile" label="게시판 대표 사진" />
+        <ActivityFormField name="boardName" label="게시판 제목">
+          {(field) => (
+            <Input {...field} placeholder="게시판 제목을 입력해주세요" />
+          )}
+        </ActivityFormField>
+        <ActivityFormField name="boardIntro" label="게시판 소개">
+          {(field) => (
+            <Textarea {...field} placeholder="게시판 소개글을 작성해주세요" />
+          )}
+        </ActivityFormField>
+        <ActivityFormField name="imageFile" label="게시판 대표 사진">
+          {(field) => <ActivityImageInput field={field} />}
+        </ActivityFormField>
         <SelectMemberField name="participants" label="게시판 이용자" />
         <div className="flex justify-end">
           <Button type="submit" disabled={isExecuting}>

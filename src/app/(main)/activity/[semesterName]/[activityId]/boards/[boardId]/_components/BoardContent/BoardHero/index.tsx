@@ -22,11 +22,3 @@ export const BoardHero = ({ board }: BoardHeroProps) => {
     </div>
   )
 }
-
-const navLinks = [
-  {
-    index: 0,
-    link: '/activity',
-    name: 'activity',
-  },
-]
