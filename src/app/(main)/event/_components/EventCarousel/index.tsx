@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import {
   Carousel,
@@ -11,7 +12,7 @@ export function EventCarousel() {
   return (
     <Carousel
       opts={{ loop: true }}
-      className="xs:max-w-sm w-full max-w-52 sm:max-w-xl"
+      className="xs:max-w-sm w-full max-w-52 sm:max-w-xl xl:max-w-screen-xl"
     >
       <CarouselContent>
         {Array.from({ length: 5 }).map((_, index) => (
@@ -32,6 +33,11 @@ export function EventCarousel() {
           </CarouselItem>
         ))}
       </CarouselContent>
+      <div className="flex w-full justify-end pr-4">
+        <Button variant="link" className="h-fit p-0 text-primary/60">
+          더보기
+        </Button>
+      </div>
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
