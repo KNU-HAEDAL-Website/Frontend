@@ -15,7 +15,7 @@ const CreatePostPage = ({ params }: CreatePostPageParams) => {
         activityId={Number(params.activityId)}
         boardId={Number(params.boardId)}
       />
-      <CreatePostForm />
+      <CreatePostForm boardId={Number(params.boardId)} />
     </div>
   )
 }

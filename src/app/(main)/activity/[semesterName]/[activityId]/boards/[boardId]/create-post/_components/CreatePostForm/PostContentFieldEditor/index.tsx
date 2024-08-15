@@ -1,42 +1,37 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 
 import { Block, BlockNoteEditor, PartialBlock } from '@blocknote/core'
 import { BlockNoteView } from '@blocknote/mantine'
 import '@blocknote/mantine/style.css'
+import { useCreateBlockNote } from '@blocknote/react'
 
-import { usePostEditorStore } from '~create-post/_store/post-editor'
+import { FormField, FormItem, FormMessage } from '@/components/ui/form'
+import { CreatePost } from '@/schema/post'
 
 export const PostContentFieldEditor = () => {
-  const { setPostContent, getPostContent } = usePostEditorStore()
-  const [initialContent, setInitialContent] = useState<
-    'loading' | PartialBlock[] | undefined
-  >('loading')
+  const { control } = useFormContext<CreatePost>()
 
-  useEffect(() => {
-    const storedBlocks = getPostContent()
-    setInitialContent(storedBlocks)
-  }, [getPostContent])
-
-  const editor = useMemo(() => {
-    if (initialContent === 'loading') {
-      return undefined
-    }
-    return BlockNoteEditor.create({ initialContent })
-  }, [initialContent])
-
-  if (editor === undefined) {
-    return <div>글 불러오는 중...</div>
-  }
+  const editor = useCreateBlockNote({ initialContent: [{}] })
 
   return (
-    <BlockNoteView
-      editor={editor}
-      onChange={() => {
-        setPostContent(editor.document as Block[])
-      }}
-      className="h-96 overflow-auto rounded-md border pt-4"
+    <FormField
+      control={control}
+      name="postContent"
+      render={({ field }) => (
+        <FormItem>
+          <BlockNoteView
+            editor={editor}
+            onChange={() => field.onChange(JSON.stringify(editor.document))}
+            className="h-96 overflow-auto rounded-md border pt-4"
+          />
+          <div className="flex justify-end">
+            <FormMessage />
+          </div>
+        </FormItem>
+      )}
     />
   )
 }

@@ -1,4 +1,4 @@
-import { ControllerRenderProps, FieldValues } from 'react-hook-form'
+import { ControllerRenderProps } from 'react-hook-form'
 
 import { Input } from '@/components/ui/input'
 
