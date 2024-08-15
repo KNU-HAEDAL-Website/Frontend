@@ -10,7 +10,7 @@ type CreatePostPageParams = {
 
 const CreatePostPage = ({ params }: CreatePostPageParams) => {
   return (
-    <div className="gap-10">
+    <div className="flex flex-col gap-6 py-10">
       <CreatePostHero
         activityId={Number(params.activityId)}
         boardId={Number(params.boardId)}

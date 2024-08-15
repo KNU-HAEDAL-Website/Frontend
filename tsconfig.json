@@ -20,7 +20,10 @@
     "paths": {
       "@/*": ["./src/*"],
       "~auth/*": ["./src/app/auth/*"],
-      "~activity/*": ["./src/app/(main)/activity/*"]
+      "~activity/*": ["./src/app/(main)/activity/*"],
+      "~create-post/*": [
+        "./src/app/(main)/activity/[semesterName]/[activityId]/boards/[boardId]/create-post/*"
+      ]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -30,7 +30,7 @@ export const CreatePostHero = ({
   ]
 
   return (
-    <div className="py-6">
+    <div>
       <Seperator variant="dark" />
       <ActivityBreadcrumb navLinks={navLinks} pageName="게시글 생성하기" />
       <Seperator variant="dark" />
