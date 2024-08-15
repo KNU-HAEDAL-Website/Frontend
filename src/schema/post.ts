@@ -3,7 +3,6 @@
 import { z } from 'zod'
 
 export const CreatePostSchema = z.object({
-  boardId: z.number(),
   postTitle: z
     .string()
     .min(1, { message: '게시글 제목을 입력해주세요.' })
@@ -15,7 +14,7 @@ export const CreatePostSchema = z.object({
       message: '이미지 파일 크기는 5MB 이하만 가능합니다.',
     })
     .refine((f) => !!f.name, {
-      message: '게시글 대표 이미지를 선택해주세요.',
+      message: '게시글 대표 사진을 선택해주세요.',
     }),
   activityDate: z
     .object({
@@ -28,3 +27,9 @@ export const CreatePostSchema = z.object({
 })
 
 export type CreatePost = z.infer<typeof CreatePostSchema>
+
+export const CreateActivityPostSchema = CreatePostSchema.extend({
+  boardId: z.number(),
+})
+
+export type CreateActivityPost = z.infer<typeof CreateActivityPostSchema>

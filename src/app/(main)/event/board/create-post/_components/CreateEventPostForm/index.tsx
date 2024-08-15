@@ -9,16 +9,10 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import { CreatePostForm } from '@/components/CreatePostForm'
 import { useToast } from '@/components/ui/use-toast'
-import { CreateActivityPost, CreateActivityPostSchema } from '@/schema/post'
-import { createActivityPostAction } from '@/service/server/post/create-post'
+import { CreatePost, CreatePostSchema } from '@/schema/post'
+import { createEventPostAction } from '@/service/server/post/create-post'
 
-type CreateActivityPostFormProps = {
-  boardId: number
-}
-
-export const CreateActivityPostForm = ({
-  boardId,
-}: CreateActivityPostFormProps) => {
+export const CreateEventPostForm = () => {
   const { toast } = useToast()
   const router = useRouter()
   const pathName = usePathname()
@@ -29,12 +23,11 @@ export const CreateActivityPostForm = ({
     execute: createPost,
     result,
     isExecuting,
-  } = useAction(createActivityPostAction)
+  } = useAction(createEventPostAction)
 
-  const form = useForm<CreateActivityPost>({
-    resolver: zodResolver(CreateActivityPostSchema),
+  const form = useForm<CreatePost>({
+    resolver: zodResolver(CreatePostSchema),
     defaultValues: {
-      boardId,
       postTitle: '',
       postContent: '',
       imageFile: new File([], ''),
@@ -64,7 +57,7 @@ export const CreateActivityPostForm = ({
   }, [result])
 
   return (
-    <CreatePostForm<CreateActivityPost>
+    <CreatePostForm<CreatePost>
       form={form}
       onSubmit={(values) => createPost(values)}
       isExecuting={isExecuting}
