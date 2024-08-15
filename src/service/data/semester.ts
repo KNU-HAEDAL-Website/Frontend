@@ -1,6 +1,6 @@
 import { queryOptions, useQuery } from '@tanstack/react-query'
 
-import { DATA_ERROR } from '@/constant/errorMessage'
+import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
 import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { getSemesters } from '@/service/server/semester'
 import { Semester } from '@/types/activity'
@@ -41,7 +41,7 @@ export const useCurrentSemester = (semesterName: string) => {
   )
 
   if (!currentSemester) {
-    throw new Error(DATA_ERROR.SEMESTER_NOT_FOUND)
+    throw new Error(DATA_ERROR_MESSAGES.SEMESTER_NOT_FOUND)
   }
 
   return currentSemester

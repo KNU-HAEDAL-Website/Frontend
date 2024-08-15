@@ -9,7 +9,7 @@ export const API_ERROR_MESSAGES = {
   UNKNOWN_ERROR: '예기치 않은 오류가 발생했습니다. 관리자에게 문의해주세요.',
 }
 
-export const DATA_ERROR = {
+export const DATA_ERROR_MESSAGES = {
   SEMESTER_NOT_FOUND: '학기를 불러오는 데 오류가 발생했습니다.',
   ACTIVITY_NOT_FOUND: '활동을 불러오는 데 오류가 발생했습니다.',
   BOARD_DETAIL_NOT_FOUND: '게시판 정보를 불러오는 데 오류가 발생했습니다.',

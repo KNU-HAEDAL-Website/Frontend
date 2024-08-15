@@ -1,6 +1,6 @@
 import { keepPreviousData, queryOptions, useQuery } from '@tanstack/react-query'
 
-import { DATA_ERROR } from '@/constant/errorMessage'
+import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
 import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { getBoardDetail, getBoardsPaging } from '@/service/server/board'
 
@@ -49,7 +49,7 @@ export const useCurrentBoardDetail = ({
   const boardDetail = queryClient.getQueryData(queryKey)
 
   if (!boardDetail) {
-    throw new Error(DATA_ERROR.BOARD_DETAIL_NOT_FOUND)
+    throw new Error(DATA_ERROR_MESSAGES.BOARD_DETAIL_NOT_FOUND)
   }
 
   return boardDetail
