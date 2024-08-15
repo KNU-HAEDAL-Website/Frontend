@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import {
@@ -34,9 +36,11 @@ export function EventCarousel() {
         ))}
       </CarouselContent>
       <div className="flex w-full justify-end pr-4">
-        <Button variant="link" className="h-fit p-0 text-primary/60">
-          더보기
-        </Button>
+        <Link href="/event/board">
+          <Button variant="link" className="h-fit p-0 text-primary/60">
+            더보기
+          </Button>
+        </Link>
       </div>
       <CarouselPrevious />
       <CarouselNext />
