@@ -9,17 +9,17 @@ import {
 } from '@/components/ui/form'
 import { Label } from '@/components/ui/label'
 
-type CreateBoardInputFieldProps = {
+type PostFormFieldProps = {
   name: string
   label: string
   children: (field: ControllerRenderProps) => ReactNode
 }
 
-export const ActivityFormField = ({
+export const PostFormField = ({
   name,
   label,
   children,
-}: CreateBoardInputFieldProps) => {
+}: PostFormFieldProps) => {
   const form = useFormContext()
 
   return (

@@ -8,15 +8,15 @@ import { useCurrentBoardDetail } from '@/service/data/boards'
 
 import { ActivityBreadcrumb } from '~activity/_components/ActivityBreadcrumb'
 
-type CreatePostHeroProps = {
+type CreateActivityPostHeroProps = {
   activityId: number
   boardId: number
 }
 
-export const CreatePostHero = ({
+export const CreateActivityPostHero = ({
   activityId,
   boardId,
-}: CreatePostHeroProps) => {
+}: CreateActivityPostHeroProps) => {
   const pathName = usePathname()
 
   const boardPath = pathName.split('/').slice(0, -1).join('/')

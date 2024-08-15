@@ -1,5 +1,5 @@
-import { CreatePostForm } from './_components/CreatePostForm'
-import { CreatePostHero } from './_components/CreatePostHero'
+import { CreateActivityPostForm } from './_components/CreateActivityPostForm'
+import { CreateActivityPostHero } from './_components/CreateActivityPostHero'
 
 type CreatePostPageParams = {
   params: {
@@ -8,16 +8,16 @@ type CreatePostPageParams = {
   }
 }
 
-const CreatePostPage = ({ params }: CreatePostPageParams) => {
+const CreateActivityPostPage = ({ params }: CreatePostPageParams) => {
   return (
     <div className="flex flex-col gap-6 py-10">
-      <CreatePostHero
+      <CreateActivityPostHero
         activityId={Number(params.activityId)}
         boardId={Number(params.boardId)}
       />
-      <CreatePostForm boardId={Number(params.boardId)} />
+      <CreateActivityPostForm boardId={Number(params.boardId)} />
     </div>
   )
 }
 
-export default CreatePostPage
+export default CreateActivityPostPage

@@ -2,11 +2,11 @@ import { ControllerRenderProps } from 'react-hook-form'
 
 import { Input } from '@/components/ui/input'
 
-type ActivityImageInputProps = {
+type ImageInputProps = {
   field: ControllerRenderProps
 }
 
-export const ActivityImageInput = ({ field }: ActivityImageInputProps) => {
+export const ImageInput = ({ field }: ImageInputProps) => {
   return (
     <Input
       accept=".jpg, .jpeg"
