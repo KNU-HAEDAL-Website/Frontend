@@ -8,7 +8,9 @@ const ActivityLayout = ({ children }: { children: ReactNode }) => {
   return (
     <ErrorHandlingWrapper
       fallbackComponent={ActivityErrorFallback}
-      suspenseFallback={<div>loading...</div>}
+      suspenseFallback={
+        <div className="flex w-full justify-center pt-20">loading...</div>
+      }
     >
       {children}
     </ErrorHandlingWrapper>

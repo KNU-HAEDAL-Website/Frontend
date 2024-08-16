@@ -1,4 +1,6 @@
-import { queryOptions, useQuery, useSuspenseQuery } from '@tanstack/react-query'
+'use client'
+
+import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
 
 import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
 import { queryClient } from '@/service/components/ReactQueryClientProvider'

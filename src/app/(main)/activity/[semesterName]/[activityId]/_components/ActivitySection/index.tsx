@@ -13,7 +13,7 @@ export const ActivitySection = ({
   semesterId,
   activityId,
 }: ActivitySectionProps) => {
-  const { data: activities, status } = useGetActivities(semesterId)
+  const { data: activities } = useGetActivities(semesterId)
   const currentActivity = useCurrentActivity(semesterId, activityId)
 
   if (!activities?.length) return <div>활동이 없습니다.</div>

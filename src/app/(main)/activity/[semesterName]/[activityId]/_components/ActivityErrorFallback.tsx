@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect } from 'react'
+
 import { usePathname, useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
@@ -15,13 +17,16 @@ const ActivityErrorFallback = ({
   const pathName = usePathname()
   const router = useRouter()
 
-  if (error?.message === DATA_ERROR_MESSAGES.ACTIVITY_NOT_FOUND) {
-    const semesterName = getSemesterNameFromPath(pathName)
-    const currentSemester = useCurrentSemester(semesterName)
-    const {} = useGetActivities(Number(currentSemester.semesterId))
+  const semesterName = getSemesterNameFromPath(pathName)
+  const currentSemester = useCurrentSemester(semesterName)
 
-    resetErrorBoundary()
-  }
+  useGetActivities(Number(currentSemester.semesterId))
+
+  useEffect(() => {
+    if (error?.message === DATA_ERROR_MESSAGES.ACTIVITY_NOT_FOUND) {
+      resetErrorBoundary()
+    }
+  }, [error])
 
   return (
     <div className="flex flex-col items-center gap-6 pt-40">
@@ -30,7 +35,7 @@ const ActivityErrorFallback = ({
         <Button variant="secondary" onClick={() => router.back()}>
           뒤로가기
         </Button>
-        <Button onClick={() => router.push('/auth/login')}> 로그인 </Button>
+        <Button onClick={() => router.push('/auth/login')}>로그인</Button>
       </div>
     </div>
   )
