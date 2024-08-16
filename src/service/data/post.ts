@@ -1,6 +1,28 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 
-import { getPostsPaging, getPostsSlider } from '@/service/server/post'
+import {
+  getActivityPostsPaging,
+  getPostsPaging,
+  getPostsSlider,
+} from '@/service/server/post'
+
+type ActivityPostParams = {
+  boardId: number
+  page: number
+  size?: number
+}
+
+export const useGetActivityPostsPaging = ({
+  boardId,
+  page,
+  size = 10,
+}: ActivityPostParams) => {
+  return useQuery({
+    queryKey: ['posts', boardId, page],
+    queryFn: () => getActivityPostsPaging({ boardId, page, size }),
+    placeholderData: keepPreviousData,
+  })
+}
 
 type PostsParams = {
   postType: 'EVENT' | 'NOTICE'

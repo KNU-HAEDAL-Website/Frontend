@@ -3,18 +3,73 @@ import { AUTHORIZATION_API, BACKEND_API } from '@/service/config'
 import { PagaingRaw, Paging } from '@/service/types/paging'
 import { Post, PostSlider } from '@/types/post'
 
-type PostsPagingRequestParams = {
-  postType: 'NOTICE' | 'EVENT'
-  page?: number
-  size?: number
-}
-
 interface PostsPaingResponseRaw extends PagaingRaw {
   content: Post[]
 }
 
 export interface PostsResponse extends Paging {
   posts: Post[]
+}
+
+type ActivityPostsPagingRequestParams = {
+  boardId: number
+  page?: number
+  size?: number
+}
+
+export const getActivityPostsPaging = async (
+  params: ActivityPostsPagingRequestParams,
+): Promise<PostsResponse> => {
+  const response = await BACKEND_API.get<PostsPaingResponseRaw>(
+    getActivityPostsPath(params),
+  )
+
+  const { data } = response
+
+  const posts = data.content.map((post) => {
+    const formatCreateDate = formatDateDistanceFromToday(
+      new Date(post.postCreateDate),
+    )
+
+    if (!formatCreateDate) return post
+
+    return {
+      ...post,
+      postCreateDate: formatCreateDate,
+    }
+  })
+
+  return {
+    posts,
+    nextPageToken:
+      data.pageable.pageNumber !== data.totalPages
+        ? (data.pageable.pageNumber + 1).toString()
+        : undefined,
+    pageInfo: {
+      totalPages: data.totalPages,
+      totalElements: data.totalElements,
+      pageSize: data.pageable.pageSize,
+    },
+  }
+}
+
+const getActivityPostsPath = ({
+  boardId,
+  page,
+  size,
+}: ActivityPostsPagingRequestParams) => {
+  const params = new URLSearchParams()
+
+  if (page) params.append('page', page.toString())
+  if (size) params.append('size', size.toString())
+
+  return `/boards/${boardId}/posts?${params.toString()}`
+}
+
+type PostsPagingRequestParams = {
+  postType: 'NOTICE' | 'EVENT'
+  page?: number
+  size?: number
 }
 
 export const getPostsPaging = async (
