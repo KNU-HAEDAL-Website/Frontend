@@ -1,7 +1,7 @@
 import { formatDateDistanceFromToday } from '@/lib/date-distance'
 import { AUTHORIZATION_API, BACKEND_API } from '@/service/config'
 import { PagaingRaw, Paging } from '@/service/types/paging'
-import { Post } from '@/types/post'
+import { Post, PostSlider } from '@/types/post'
 
 type PostsPagingRequestParams = {
   postType: 'NOTICE' | 'EVENT'
@@ -61,6 +61,51 @@ const getPostsPath = ({ postType, page, size }: PostsPagingRequestParams) => {
   if (size) params.append('size', size.toString())
 
   return `/posts?${params.toString()}`
+}
+
+type PostsSliderRequestParams = {
+  page?: number
+  size?: number
+}
+
+interface PostsSliderResponseRaw extends PagaingRaw {
+  content: PostSlider[]
+}
+
+interface PostsSliderResponse extends Paging {
+  posts: PostSlider[]
+}
+
+export const getPostsSlider = async (
+  params: PostsSliderRequestParams,
+): Promise<PostsSliderResponse> => {
+  const response = await BACKEND_API.get<PostsSliderResponseRaw>(
+    getPostsSliderPath(params),
+  )
+
+  const { data } = response
+
+  return {
+    posts: data.content,
+    nextPageToken:
+      data.pageable.pageNumber !== data.totalPages
+        ? (data.pageable.pageNumber + 1).toString()
+        : undefined,
+    pageInfo: {
+      totalPages: data.totalPages,
+      totalElements: data.totalElements,
+      pageSize: data.pageable.pageSize,
+    },
+  }
+}
+
+const getPostsSliderPath = ({ page, size }: PostsSliderRequestParams) => {
+  const params = new URLSearchParams()
+
+  if (page) params.append('page', page.toString())
+  if (size) params.append('size', size.toString())
+
+  return `/posts/slider?${params.toString()}`
 }
 
 type generatePresignedUrlResposne = {
