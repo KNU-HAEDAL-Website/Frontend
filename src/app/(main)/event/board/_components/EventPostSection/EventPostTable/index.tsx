@@ -6,7 +6,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 
-import { TableContent } from '@/components/Table/TableContent'
+import { TableContent } from '@/components/TableContent'
 import { Post } from '@/types/post'
 
 type EventPostTableProps = {
