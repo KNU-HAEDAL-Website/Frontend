@@ -48,6 +48,7 @@ export const getPostsPaging = async (
     pageInfo: {
       totalPages: data.totalPages,
       totalElements: data.totalElements,
+      pageSize: data.pageable.pageSize,
     },
   }
 }
