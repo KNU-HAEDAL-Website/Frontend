@@ -9,8 +9,10 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { getMyInfo } from '@/service/server'
 import { loginAction } from '@/service/server/login'
 import { useAuthStore } from '@/store/auth'
+import { useMyInfoStore } from '@/store/myInfo'
 
 import { LoginErrorMessage } from '~auth/login/_components/LoginErrorMesage'
 
@@ -23,6 +25,7 @@ export const LoginForm = () => {
   const router = useRouter()
   const { execute, result, isExecuting } = useAction(loginAction)
   const setAccessToken = useAuthStore((state) => state.setAccessToken)
+  const setMyInfo = useMyInfoStore((state) => state.setMyInfo)
 
   const form = useForm<LoginSchema>({
     defaultValues: {
@@ -38,9 +41,17 @@ export const LoginForm = () => {
   }
 
   useEffect(() => {
-    if (result.data?.status === 200) {
+    if (result.data?.isSuccess) {
       setAccessToken(result.data.token)
-      router.push('/')
+
+      const fetchAndStoreMyInfo = async () => {
+        const myInfo = await getMyInfo()
+        setMyInfo({ userName: myInfo.userName, role: myInfo.role })
+      }
+
+      fetchAndStoreMyInfo().then(() => {
+        router.push('/')
+      })
     }
   })
 

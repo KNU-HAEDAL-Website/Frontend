@@ -24,7 +24,7 @@ export const loginAction = actionClient
 
       const accessToken = res.headers['authorization']
 
-      return { status: res.status, token: accessToken }
+      return { isSuccess: true, token: accessToken }
     } catch (error) {
       if (error instanceof AxiosError) {
         const res = error.response
