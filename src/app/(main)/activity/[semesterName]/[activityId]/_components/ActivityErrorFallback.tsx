@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
@@ -13,20 +13,25 @@ const ActivityErrorFallback = ({
   resetErrorBoundary,
 }: FallbackProps) => {
   const pathName = usePathname()
+  const router = useRouter()
 
   if (error?.message === DATA_ERROR_MESSAGES.ACTIVITY_NOT_FOUND) {
     const semesterName = getSemesterNameFromPath(pathName)
     const currentSemester = useCurrentSemester(semesterName)
-    const { status } = useGetActivities(Number(currentSemester.semesterId))
+    const {} = useGetActivities(Number(currentSemester.semesterId))
 
-    if (status === 'pending') return <div>loading...</div>
     resetErrorBoundary()
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <p>{error?.message} </p>
-      <Button onClick={() => resetErrorBoundary()}> 다시 시도 </Button>
+    <div className="flex flex-col items-center gap-6 pt-40">
+      <div>{error?.message} </div>
+      <div className="flex gap-2">
+        <Button variant="secondary" onClick={() => router.back()}>
+          뒤로가기
+        </Button>
+        <Button onClick={() => router.push('/auth/login')}> 로그인 </Button>
+      </div>
     </div>
   )
 }

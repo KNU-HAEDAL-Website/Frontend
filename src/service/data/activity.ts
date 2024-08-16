@@ -1,4 +1,4 @@
-import { queryOptions, useQuery } from '@tanstack/react-query'
+import { queryOptions, useQuery, useSuspenseQuery } from '@tanstack/react-query'
 
 import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
 import { queryClient } from '@/service/components/ReactQueryClientProvider'
@@ -12,7 +12,7 @@ const activitiesQuery = (semesterId: number) =>
   })
 
 export const useGetActivities = (semesterId: number) => {
-  return useQuery(activitiesQuery(semesterId))
+  return useSuspenseQuery(activitiesQuery(semesterId))
 }
 
 export const useCurrentActivity = (semesterId: number, activityId: number) => {

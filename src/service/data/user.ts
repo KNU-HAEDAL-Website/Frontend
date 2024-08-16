@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
 import { getUsers } from '@/service/server/user'
 
@@ -7,7 +7,7 @@ export const useGetUsers = () => {
     data: users,
     status,
     error,
-  } = useQuery({
+  } = useSuspenseQuery({
     queryKey: ['users', 'active'],
     queryFn: async () => getUsers(),
   })

@@ -21,13 +21,12 @@ type SelectMemberFieldProps = {
 }
 
 export const SelectMemberField = ({ name, label }: SelectMemberFieldProps) => {
-  const { users, status } = useGetUsers()
+  const { users } = useGetUsers()
 
   const form = useFormContext()
   const [selectedMember, setSelectedMember] = useState<User[]>([])
 
-  if (status === 'pending') return <div>loading...</div>
-  if (!users) return <div>?</div>
+  if (!users) return <div>유저가 없습니다.</div>
 
   return (
     <FormField

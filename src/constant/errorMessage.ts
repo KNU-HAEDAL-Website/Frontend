@@ -14,3 +14,7 @@ export const DATA_ERROR_MESSAGES = {
   ACTIVITY_NOT_FOUND: '활동을 불러오는 데 오류가 발생했습니다.',
   BOARD_DETAIL_NOT_FOUND: '게시판 정보를 불러오는 데 오류가 발생했습니다.',
 }
+
+export const ACCESS_ERROR_MESSAGE = {
+  UNAUTHORIZED_ERROR: '해당 페이지에 접근 할 권한이 없습니다.',
+}

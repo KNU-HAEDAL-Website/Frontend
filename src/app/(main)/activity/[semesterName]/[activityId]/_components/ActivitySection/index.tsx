@@ -16,7 +16,6 @@ export const ActivitySection = ({
   const { data: activities, status } = useGetActivities(semesterId)
   const currentActivity = useCurrentActivity(semesterId, activityId)
 
-  if (status === 'pending') return <div>loading...</div>
   if (!activities?.length) return <div>활동이 없습니다.</div>
 
   return (
