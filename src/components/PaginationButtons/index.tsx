@@ -18,12 +18,11 @@ type PaginationButtonsProps<T extends Paging> = {
 export const PaginationButtons = <T extends Paging>({
   data,
 }: PaginationButtonsProps<T>) => {
-  const pages = createPageNumber(data.pageInfo.totalPages)
-
   const searchParams = useSearchParams()
   const pathName = usePathname()
 
   const currentPage = Number(searchParams.get('page')) || 1
+  const pages = createPageNumber(data.pageInfo.totalPages, currentPage)
 
   const getPageURL = (pageNumber: number) => {
     const params = new URLSearchParams(searchParams)
@@ -61,6 +60,13 @@ export const PaginationButtons = <T extends Paging>({
   )
 }
 
-const createPageNumber = (totalPages: number) => {
-  return Array.from({ length: totalPages }, (_, index) => index + 1)
+const createPageNumber = (totalPages: number, currentPage: number) => {
+  const endPage = Math.min(totalPages, currentPage + 2)
+
+  const length = Math.min(5, totalPages)
+  const adjustedStartPage = Math.max(1, endPage - 5 + 1)
+
+  return Array.from({ length }, (_, index) => index + adjustedStartPage).filter(
+    (page) => page <= totalPages,
+  )
 }
