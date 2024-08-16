@@ -35,8 +35,8 @@ export const SelectMemberField = ({ name, label }: SelectMemberFieldProps) => {
       name={name}
       render={({ field }) => (
         <FormItem className="flex flex-col">
-          <div className="flex flex-col md:flex-row md:items-center">
-            <Label className="text-md w-40">{label}</Label>
+          <div className="flex h-full flex-col md:flex-row md:items-start">
+            <Label className="text-md w-40 pt-2">{label}</Label>
             <FormControl className="h-8 cursor-pointer">
               <MultipleMemberSelect
                 options={users}
