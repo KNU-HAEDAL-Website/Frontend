@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 
 import { useSearchParams } from 'next/navigation'
 
-import { TablePaginationButton } from '@/components/Table/TablePaginationButton'
+import { PaginationButtons } from '@/components/PaginationButtons'
 import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { useGetPostsPaging } from '@/service/data/post'
 import { getPostsPaging } from '@/service/server/post'
@@ -48,7 +48,7 @@ export const EventPostSection = () => {
         pageNumber={page}
         pageSize={data.pageInfo.pageSize}
       />
-      <TablePaginationButton data={data} />
+      <PaginationButtons data={data} />
     </div>
   )
 }

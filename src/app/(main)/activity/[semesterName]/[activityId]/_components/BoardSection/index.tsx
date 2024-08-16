@@ -1,20 +1,26 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
+import { useSearchParams } from 'next/navigation'
+
+import { PaginationButtons } from '@/components/PaginationButtons'
 import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { useGetBoardsPaging } from '@/service/data/boards'
 import { getBoardsPaging } from '@/service/server/board'
 
 import { BoardList } from './BoardList/indext'
-import { BoardPaginationButton } from './BoardPaginationButton'
 
 type BoardSectionProps = {
   activityId: number
 }
 
 export const BoardSection = ({ activityId }: BoardSectionProps) => {
-  const [page, setPage] = useState(0)
+  const searchParams = useSearchParams()
+  const params = new URLSearchParams(searchParams)
+
+  const page =
+    Number(params.get('page')) > 0 ? Number(params.get('page')) - 1 : 0
 
   const { data, status, isPlaceholderData } = useGetBoardsPaging({
     activityId: activityId,
@@ -24,12 +30,8 @@ export const BoardSection = ({ activityId }: BoardSectionProps) => {
   useEffect(() => {
     if (!isPlaceholderData && data?.nextPageToken) {
       queryClient.prefetchQuery({
-        queryKey: ['boards', activityId, page + 1],
-        queryFn: () =>
-          getBoardsPaging({
-            activityId: activityId,
-            page: page + 1,
-          }),
+        queryKey: ['boards', activityId, page],
+        queryFn: () => getBoardsPaging({ activityId, page }),
       })
     }
   }, [data, isPlaceholderData, page, queryClient])
@@ -40,11 +42,7 @@ export const BoardSection = ({ activityId }: BoardSectionProps) => {
   return (
     <div className="flex w-full flex-col items-center gap-6">
       <BoardList boards={data.boards} />
-      <BoardPaginationButton
-        boardData={data}
-        currentPage={page}
-        setCurrentPage={setPage}
-      />
+      <PaginationButtons data={data} />
     </div>
   )
 }

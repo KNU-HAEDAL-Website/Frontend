@@ -11,13 +11,13 @@ import {
 } from '@/components/ui/pagination'
 import { Paging } from '@/service/types/paging'
 
-type TablePaginationButtonProps<T extends Paging> = {
+type PaginationButtonsProps<T extends Paging> = {
   data: T
 }
 
-export const TablePaginationButton = <T extends Paging>({
+export const PaginationButtons = <T extends Paging>({
   data,
-}: TablePaginationButtonProps<T>) => {
+}: PaginationButtonsProps<T>) => {
   const pages = createPageNumber(data.pageInfo.totalPages)
 
   const searchParams = useSearchParams()
