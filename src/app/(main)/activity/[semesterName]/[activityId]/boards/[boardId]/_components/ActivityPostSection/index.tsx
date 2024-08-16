@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 
 import { useSearchParams } from 'next/navigation'
 
+import { PaginationButtons } from '@/components/PaginationButtons'
+import { PostTable } from '@/components/Table/PostTable'
 import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { useGetActivityPostsPaging } from '@/service/data/post'
 import { getActivityPostsPaging } from '@/service/server/post'
@@ -39,10 +41,13 @@ export const ActivityPostSection = ({ boardId }: ActivityPostSectionProps) => {
   }
 
   return (
-    <div>
-      {data.posts.map((post) => (
-        <div>{post.postTitle}</div>
-      ))}
+    <div className="flex flex-col gap-6">
+      <PostTable
+        posts={data.posts}
+        pageNumber={page}
+        pageSize={data.pageInfo.pageSize}
+      />
+      <PaginationButtons data={data} />
     </div>
   )
 }

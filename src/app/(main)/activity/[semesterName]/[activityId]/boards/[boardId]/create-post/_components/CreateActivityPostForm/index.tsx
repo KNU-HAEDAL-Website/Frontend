@@ -10,6 +10,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { CreatePostForm } from '@/components/CreatePostForm'
 import { useToast } from '@/components/ui/use-toast'
 import { CreateActivityPost, CreateActivityPostSchema } from '@/schema/post'
+import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { createActivityPostAction } from '@/service/server/post/create-post'
 
 type CreateActivityPostFormProps = {
@@ -51,7 +52,9 @@ export const CreateActivityPostForm = ({
         title: result.data.message,
         duration: 3000,
       })
+      queryClient.invalidateQueries({ queryKey: ['posts', boardId, 0] })
       router.push(basePath)
+
       return
     }
 
