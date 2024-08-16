@@ -8,6 +8,7 @@ import { useGetActivities } from '@/service/data/activity'
 import { useCurrentSemester } from '@/service/data/semester'
 
 import { SemesterSection } from './[activityId]/_components/SemesterSection'
+import { ActivitySkeleton } from './_components/ActivitySkeleton'
 
 type RedirectActivityParams = {
   params: { semesterName: string }
@@ -20,13 +21,17 @@ const RedirectActivity = ({ params }: RedirectActivityParams) => {
   const currentSemester = useCurrentSemester(params.semesterName)
   const { data: activities } = useGetActivities(currentSemester.semesterId)
 
-  useEffect(() => {
-    if (activities && activities.length > 0) {
-      const firstActivity = activities[0].activityId
+  if (activities && activities.length > 0) {
+    const firstActivity = activities[0].activityId
 
-      router.push(`${pathName}/${firstActivity}`)
-    }
-  }, [activities, router])
+    router.push(`${pathName}/${firstActivity}`)
+    return (
+      <div className="flex flex-col items-center gap-2">
+        <SemesterSection semesterName={params.semesterName} />
+        <ActivitySkeleton />
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col items-center gap-2">
