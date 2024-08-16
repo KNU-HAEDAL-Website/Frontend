@@ -5,11 +5,10 @@ import { useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 
 import { PaginationButtons } from '@/components/PaginationButtons'
+import { PostTable } from '@/components/Table/PostTable'
 import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { useGetPostsPaging } from '@/service/data/post'
 import { getPostsPaging } from '@/service/server/post'
-
-import { EventPostTable } from './EventPostTable'
 
 export const EventPostSection = () => {
   const postType = 'EVENT'
@@ -43,7 +42,7 @@ export const EventPostSection = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <EventPostTable
+      <PostTable
         posts={data.posts}
         pageNumber={page}
         pageSize={data.pageInfo.pageSize}

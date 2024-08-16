@@ -6,20 +6,17 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 
-import { TableContent } from '@/components/TableContent'
 import { Post } from '@/types/post'
 
-type EventPostTableProps = {
+import { TableContent } from '../TableContent'
+
+type PostTableProps = {
   posts: Post[]
   pageNumber: number
   pageSize: number
 }
 
-export const EventPostTable = ({
-  posts,
-  pageNumber,
-  pageSize,
-}: EventPostTableProps) => {
+export const PostTable = ({ posts, pageNumber, pageSize }: PostTableProps) => {
   if (!posts?.length)
     return <div className="flex w-full justify-center">게시글이 없습니다.</div>
 
