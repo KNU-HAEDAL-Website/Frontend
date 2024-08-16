@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAction } from 'next-safe-action/hooks'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import { PostFormField as BoardFormField } from '@/components/CreatePostForm/PostFormField'
 import { ImageInput } from '@/components/ImageInput'
@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
 import { CreateBoard, CreateBoardSchema } from '@/schema/board'
+import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { createBoardAction } from '@/service/server/board/create-board'
 
 import { SelectMemberField } from './SelectMemberField'
@@ -25,6 +26,9 @@ type CreateBoardFromProps = {
 
 export const CreateBoardForm = ({ activityId }: CreateBoardFromProps) => {
   const router = useRouter()
+  const pathName = usePathname()
+
+  const basePath = pathName.split('/').slice(0, -1).join('/')
 
   const {
     execute: createBoard,
@@ -50,7 +54,9 @@ export const CreateBoardForm = ({ activityId }: CreateBoardFromProps) => {
         title: result.data.message,
         duration: 3000,
       })
-      router.push('/activity')
+
+      queryClient.invalidateQueries({ queryKey: ['boards', activityId] })
+      router.push(basePath)
     }
   }, [result])
 
