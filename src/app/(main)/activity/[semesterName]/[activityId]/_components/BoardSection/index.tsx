@@ -10,6 +10,7 @@ import { useGetBoardsPaging } from '@/service/data/boards'
 import { getBoardsPaging } from '@/service/server/board'
 
 import { BoardList } from './BoardList/indext'
+import { BoardSkeleton } from './BoardSkeleton'
 
 type BoardSectionProps = {
   activityId: number
@@ -36,7 +37,7 @@ export const BoardSection = ({ activityId }: BoardSectionProps) => {
     }
   }, [data, isPlaceholderData, page, queryClient])
 
-  if (status === 'pending') return <div>loading...</div>
+  if (status === 'pending') return <BoardSkeleton />
   if (!data?.boards?.length) return <div>게시판이 없습니다.</div>
 
   return (
