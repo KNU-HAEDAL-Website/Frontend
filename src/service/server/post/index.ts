@@ -1,6 +1,7 @@
+import { formatDateDistanceFromToday } from '@/lib/date-distance'
 import { AUTHORIZATION_API, BACKEND_API } from '@/service/config'
 import { PagaingRaw, Paging } from '@/service/types/paging'
-import { Post, PostRaw } from '@/types/post'
+import { Post } from '@/types/post'
 
 type PostsPagingRequestParams = {
   postType: 'NOTICE' | 'EVENT'
@@ -9,7 +10,7 @@ type PostsPagingRequestParams = {
 }
 
 interface PostsPaingResponseRaw extends PagaingRaw {
-  content: PostRaw[]
+  content: Post[]
 }
 
 export interface PostsResponse extends Paging {
@@ -25,12 +26,18 @@ export const getPostsPaging = async (
 
   const { data } = response
 
-  const posts = data.content.map((post) => ({
-    ...post,
-    postActivityStartDate: new Date(post.postActivityStartDate),
-    postActivityEndDate: new Date(post.postActivityEndDate),
-    postCreateDate: new Date(post.postCreateDate),
-  }))
+  const posts = data.content.map((post) => {
+    const formatCreateDate = formatDateDistanceFromToday(
+      new Date(post.postCreateDate),
+    )
+
+    if (!formatCreateDate) return post
+
+    return {
+      ...post,
+      postCreateDate: formatCreateDate,
+    }
+  })
 
   return {
     posts,

@@ -1,22 +1,13 @@
-type BasePost = {
+export type Post = {
   postId: number
   postTitle: string
   postImageUrl: string
   postViews: number
   userId: string
   userName: string
-  boardId: 0
+  boardId: number
   boardName: string
-}
-
-export type PostRaw = BasePost & {
   postActivityStartDate: string
   postActivityEndDate: string
   postCreateDate: string
-}
-
-export type Post = BasePost & {
-  postActivityStartDate: Date
-  postActivityEndDate: Date
-  postCreateDate: Date
 }
