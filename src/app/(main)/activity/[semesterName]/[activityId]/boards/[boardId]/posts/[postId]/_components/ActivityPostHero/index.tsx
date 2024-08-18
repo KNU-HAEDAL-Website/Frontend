@@ -4,6 +4,7 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { usePathname } from 'next/navigation'
 
 import { Seperator } from '@/components/ui/seperator'
+import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
 import { boardDetailQuery } from '@/service/data/boards'
 
 import { ActivityBreadcrumb } from '~activity/_components/ActivityBreadcrumb'
@@ -20,14 +21,16 @@ export const ActivityPostHero = ({
   const pathName = usePathname()
   const basePath = pathName.split('/').slice(0, -2).join('/')
 
-  const { data } = useSuspenseQuery(boardDetailQuery(activityId, boardId))
+  const { data: boardDetail } = useSuspenseQuery(
+    boardDetailQuery(activityId, boardId),
+  )
 
-  if (!data) return <div>loading</div>
+  if (!boardDetail) throw new Error(DATA_ERROR_MESSAGES.BOARD_DETAIL_NOT_FOUND)
 
   const navLinks = [
     {
       link: `${basePath}`,
-      name: `${data.boardName} 게시판`,
+      name: `${boardDetail.boardName} 게시판`,
     },
   ]
 
