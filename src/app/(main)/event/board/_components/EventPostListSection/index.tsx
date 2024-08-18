@@ -10,7 +10,7 @@ import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { useGetPostsPaging } from '@/service/data/post'
 import { getPostsPaging } from '@/service/server/post'
 
-export const EventPostSection = () => {
+export const EventPostListSection = () => {
   const postType = 'EVENT'
 
   const searchParams = useSearchParams()

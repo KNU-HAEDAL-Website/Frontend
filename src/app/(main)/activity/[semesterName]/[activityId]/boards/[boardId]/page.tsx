@@ -2,7 +2,7 @@
 
 import { useBoardDetail } from '@/service/data/boards'
 
-import { ActivityPostSection } from './_components/ActivityPostSection'
+import { ActivityPostListSection } from './_components/ActivityPostListSection'
 import { BoardHero } from './_components/BoardHero'
 import { CreatePostButton } from './_components/CreatePostButton'
 
@@ -25,7 +25,7 @@ const BoardPage = ({ params }: BoardPageParams) => {
   return (
     <div className="flex w-full flex-col gap-10 pt-10">
       <BoardHero board={boardDetail} />
-      <ActivityPostSection boardId={Number(params.boardId)} />
+      <ActivityPostListSection boardId={Number(params.boardId)} />
       <CreatePostButton boardId={Number(params.boardId)} />
     </div>
   )

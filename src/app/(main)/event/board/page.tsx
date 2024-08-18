@@ -1,12 +1,12 @@
 import { CreateEventPostButton } from './_components/CreateEventPostButton'
 import { EventBoardHero } from './_components/EventBoardHero'
-import { EventPostSection } from './_components/EventPostSection'
+import { EventPostListSection } from './_components/EventPostListSection'
 
 const EventBoardPage = () => {
   return (
     <div className="flex flex-col gap-10">
       <EventBoardHero />
-      <EventPostSection />
+      <EventPostListSection />
       <div className="flex w-full justify-end">
         <CreateEventPostButton />
       </div>

@@ -8,11 +8,13 @@ import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { useGetActivityPostsPaging } from '@/service/data/post'
 import { getActivityPostsPaging } from '@/service/server/post'
 
-type ActivityPostSectionProps = {
+type ActivityPostListSectionProps = {
   boardId: number
 }
 
-export const ActivityPostSection = ({ boardId }: ActivityPostSectionProps) => {
+export const ActivityPostListSection = ({
+  boardId,
+}: ActivityPostListSectionProps) => {
   const searchParams = useSearchParams()
   const params = new URLSearchParams(searchParams)
 
