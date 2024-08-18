@@ -9,9 +9,8 @@ type ActivityPostSectionProps = {
 }
 
 export const ActivityPostSection = ({ postId }: ActivityPostSectionProps) => {
-  const { data: post, status } = useGetPost({ postId })
+  const { data: post } = useGetPost({ postId })
 
-  if (status === 'pending') return <div>loading</div>
   if (!post) return <div>게시글 정보가 없습니다.</div>
 
   return (

@@ -15,7 +15,7 @@ export type PostSlider = {
   postImageUrl: string
 }
 
-export type PostView = Omit<Post, 'postCreateDate'> & {
+export type PostView = Post & {
   postContent: string
   postImageUrl: string
   boardId: number

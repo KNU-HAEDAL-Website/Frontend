@@ -4,7 +4,7 @@ import { NavLink, PageBreadcrumb } from '@/components/PageBreadcrumb'
 
 type ActivityBreadcrumbProps = {
   navLinks: NavLink[]
-  pageName: string
+  pageName?: string
 }
 
 export const ActivityBreadcrumb = ({

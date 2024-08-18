@@ -1,4 +1,8 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import {
+  keepPreviousData,
+  useQuery,
+  useSuspenseQuery,
+} from '@tanstack/react-query'
 
 import {
   getActivityPostsPaging,
@@ -63,7 +67,7 @@ type PostParams = {
 }
 
 export const useGetPost = ({ postId }: PostParams) => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ['post', postId],
     queryFn: () => getPost({ postId }),
   })

@@ -1,6 +1,8 @@
 'use client'
 
-import { useBoardDetail } from '@/service/data/boards'
+import { useQuery } from '@tanstack/react-query'
+
+import { boardDetailQuery } from '@/service/data/boards'
 
 import { ActivityPostListSection } from './_components/ActivityPostListSection'
 import { BoardHero } from './_components/BoardHero'
@@ -14,12 +16,10 @@ type BoardPageParams = {
 }
 
 const BoardPage = ({ params }: BoardPageParams) => {
-  const { data: boardDetail, status } = useBoardDetail({
-    activityId: Number(params.activityId),
-    boardId: Number(params.boardId),
-  })
+  const { data: boardDetail } = useQuery(
+    boardDetailQuery(Number(params.activityId), Number(params.boardId)),
+  )
 
-  if (status === 'pending') return <div>loading...</div>
   if (!boardDetail) return <div>게시판 정보가 없습니다.</div>
 
   return (

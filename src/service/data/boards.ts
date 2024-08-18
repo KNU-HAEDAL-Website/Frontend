@@ -36,10 +36,6 @@ export const boardDetailQuery = (activityId: number, boardId: number) =>
     staleTime: 1000 * 60,
   })
 
-export const useBoardDetail = ({ activityId, boardId }: BoardDetailParams) => {
-  return useQuery(boardDetailQuery(activityId, boardId))
-}
-
 export const useCurrentBoardDetail = ({
   activityId,
   boardId,
