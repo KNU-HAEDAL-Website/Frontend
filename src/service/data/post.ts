@@ -2,6 +2,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query'
 
 import {
   getActivityPostsPaging,
+  getPost,
   getPostsPaging,
   getPostsSlider,
 } from '@/service/server/post'
@@ -54,5 +55,16 @@ export const useGetPostsSlider = ({
   return useQuery({
     queryKey: ['posts', 'slider'],
     queryFn: () => getPostsSlider({ page, size }),
+  })
+}
+
+type PostParams = {
+  postId: number
+}
+
+export const useGetPost = ({ postId }: PostParams) => {
+  return useQuery({
+    queryKey: ['post', postId],
+    queryFn: () => getPost({ postId }),
   })
 }

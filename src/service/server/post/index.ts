@@ -1,7 +1,7 @@
 import { formatDateDistanceFromToday } from '@/lib/date-distance'
 import { AUTHORIZATION_API, BACKEND_API } from '@/service/config'
 import { PagaingRaw, Paging } from '@/service/types/paging'
-import { Post, PostSlider } from '@/types/post'
+import { Post, PostSlider, PostView } from '@/types/post'
 
 interface PostsPaingResponseRaw extends PagaingRaw {
   content: Post[]
@@ -172,6 +172,16 @@ export const generatePresignedUrl = async () => {
   const response = await AUTHORIZATION_API.get<generatePresignedUrlResposne>(
     '/posts/generate-presigned-url',
   )
+
+  return response.data
+}
+
+type PostRequestParams = {
+  postId: number
+}
+
+export const getPost = async ({ postId }: PostRequestParams) => {
+  const response = await BACKEND_API.get<PostView>(`/posts/${postId}`)
 
   return response.data
 }
