@@ -5,7 +5,7 @@ import { queryOptions, useQuery, useSuspenseQuery } from '@tanstack/react-query'
 import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
 import { getActivities } from '@/service/server/activity'
 
-const activitiesQuery = (semesterId: number) =>
+export const activitiesQuery = (semesterId: number) =>
   queryOptions({
     queryKey: ['activities', semesterId],
     queryFn: async () => getActivities({ semesterId }),

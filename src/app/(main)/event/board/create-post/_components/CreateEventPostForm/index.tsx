@@ -54,7 +54,7 @@ export const CreateEventPostForm = () => {
         duration: 3000,
       })
     }
-  }, [result])
+  }, [result, basePath, router, toast])
 
   return (
     <CreatePostForm<CreatePost>

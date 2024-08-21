@@ -19,7 +19,7 @@ const BoardPage = ({ params }: BoardPageParams) => {
         boardId={Number(params.boardId)}
       />
       <ActivityPostListSection boardId={Number(params.boardId)} />
-      <CreatePostButton boardId={Number(params.boardId)} />
+      <CreatePostButton />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 
 import { useSearchParams } from 'next/navigation'
 
@@ -10,7 +10,7 @@ import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { useGetPostsPaging } from '@/service/data/post'
 import { getPostsPaging } from '@/service/server/post'
 
-export const EventPostListSection = () => {
+const EventPostListSectionContent = () => {
   const postType = 'EVENT'
 
   const searchParams = useSearchParams()
@@ -31,7 +31,7 @@ export const EventPostListSection = () => {
         queryFn: () => getPostsPaging({ postType, page }),
       })
     }
-  }, [data, isPlaceholderData, page, queryClient])
+  }, [data, isPlaceholderData, page])
 
   if (status === 'pending')
     return <div className="flex w-full justify-center">loading...</div>
@@ -49,5 +49,15 @@ export const EventPostListSection = () => {
       />
       <PaginationButtons data={data} />
     </div>
+  )
+}
+
+export const EventPostListSection = () => {
+  return (
+    <Suspense
+      fallback={<div className="flex w-full justify-center">로딩 중...</div>}
+    >
+      <EventPostListSectionContent />
+    </Suspense>
   )
 }

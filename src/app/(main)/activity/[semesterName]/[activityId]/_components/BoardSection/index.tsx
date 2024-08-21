@@ -35,7 +35,7 @@ export const BoardSection = ({ activityId }: BoardSectionProps) => {
         queryFn: () => getBoardsPaging({ activityId, page }),
       })
     }
-  }, [data, isPlaceholderData, page, queryClient])
+  }, [data, isPlaceholderData, page, activityId])
 
   if (status === 'pending') return <BoardSkeleton />
   if (!data?.boards?.length) return <div>게시판이 없습니다.</div>

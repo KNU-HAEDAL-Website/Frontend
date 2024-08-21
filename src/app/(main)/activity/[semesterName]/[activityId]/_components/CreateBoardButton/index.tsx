@@ -14,7 +14,7 @@ export const CreateBoardButton = () => {
 
   useEffect(() => {
     setDisabled(!(role === '해구르르' || role === '팀장'))
-  }, [])
+  }, [role])
 
   return (
     <div className="mb-20 flex w-full justify-end">

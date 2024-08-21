@@ -58,7 +58,7 @@ export const CreateBoardForm = ({ activityId }: CreateBoardFromProps) => {
       queryClient.invalidateQueries({ queryKey: ['boards', activityId] })
       router.push(basePath)
     }
-  }, [result])
+  }, [result, activityId, basePath, router, toast])
 
   const onSubmit = (form: CreateBoard) => {
     createBoard(form)

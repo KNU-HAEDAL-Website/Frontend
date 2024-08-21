@@ -47,16 +47,20 @@ export const CreateActivityPostForm = ({
   })
 
   useEffect(() => {
-    if (result.data?.isSuccess) {
-      toast({
-        title: result.data.message,
-        duration: 3000,
-      })
-      queryClient.invalidateQueries({ queryKey: ['posts', boardId, 0] })
-      router.push(basePath)
+    const handleSuccess = async () => {
+      if (result.data?.isSuccess) {
+        toast({
+          title: result.data.message,
+          duration: 3000,
+        })
 
-      return
+        await queryClient.invalidateQueries({ queryKey: ['posts', boardId] })
+
+        router.push(basePath)
+      }
     }
+
+    handleSuccess()
 
     if (result.data?.message) {
       toast({
@@ -64,7 +68,7 @@ export const CreateActivityPostForm = ({
         duration: 3000,
       })
     }
-  }, [result])
+  }, [result, basePath, boardId, router, toast])
 
   return (
     <CreatePostForm<CreateActivityPost>

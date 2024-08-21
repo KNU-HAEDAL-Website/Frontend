@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query'
 import { Seperator } from '@/components/ui/seperator'
 import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
 import { boardDetailQuery } from '@/service/data/boards'
-import { Board } from '@/types/activity'
 
 import { ActivityBreadcrumb } from '~activity/_components/ActivityBreadcrumb'
 

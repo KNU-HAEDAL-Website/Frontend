@@ -6,8 +6,6 @@ import { useRouter } from 'next/navigation'
 
 import { useGetSemesters } from '@/service/data/semester'
 
-import { SemesterSkeleton } from './_components/SemesterSkeleton'
-
 const RedirectSemester = () => {
   const router = useRouter()
   const { semesters } = useGetSemesters()
@@ -20,7 +18,7 @@ const RedirectSemester = () => {
     }
   }, [semesters, router])
 
-  return <SemesterSkeleton />
+  return null
 }
 
 export default RedirectSemester

@@ -33,7 +33,7 @@ export const MultipleMemberSelect = ({
   useEffect(() => {
     const field = value.map((member) => member.userId)
     updateField(field)
-  }, [value])
+  }, [value, updateField])
 
   const selectMember = (member: User) => {
     if (value.includes(member)) {

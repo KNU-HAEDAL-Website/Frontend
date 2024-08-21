@@ -1,5 +1,4 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
-import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'

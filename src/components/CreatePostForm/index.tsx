@@ -1,5 +1,7 @@
 import { FieldValues, UseFormReturn } from 'react-hook-form'
 
+import dynamic from 'next/dynamic'
+
 import { ImageInput } from '@/components/ImageInput'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
@@ -8,7 +10,11 @@ import { Seperator } from '@/components/ui/seperator'
 
 import { PostFormField } from './PostFormField'
 import { ActivityDateFieldDialog } from './PostFormField/ActivityDateFieldDialog'
-import { PostContentFieldEditor } from './PostFormField/PostContentFieldEditor'
+
+const PostContentFieldEditor = dynamic(
+  () => import('./PostFormField/PostContentFieldEditor'),
+  { ssr: false },
+)
 
 type CreatePostFormProps<T extends FieldValues> = {
   form: UseFormReturn<T>

@@ -3,11 +3,7 @@ import { usePathname } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 
-type CreatePostButtonProps = {
-  boardId: number
-}
-
-export const CreatePostButton = ({ boardId }: CreatePostButtonProps) => {
+export const CreatePostButton = () => {
   const pathName = usePathname()
 
   return (

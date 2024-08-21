@@ -4,9 +4,7 @@ import { useSearchParams } from 'next/navigation'
 
 import { PaginationButtons } from '@/components/PaginationButtons'
 import { PostTable } from '@/components/Table/PostTable'
-import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { useGetActivityPostsPaging } from '@/service/data/post'
-import { getActivityPostsPaging } from '@/service/server/post'
 
 type ActivityPostListSectionProps = {
   boardId: number
@@ -21,19 +19,10 @@ export const ActivityPostListSection = ({
   const page =
     Number(params.get('page')) > 0 ? Number(params.get('page')) - 1 : 0
 
-  const { data, status, isPlaceholderData } = useGetActivityPostsPaging({
+  const { data, status } = useGetActivityPostsPaging({
     boardId,
     page,
   })
-
-  useEffect(() => {
-    if (!isPlaceholderData && data?.nextPageToken) {
-      queryClient.prefetchQuery({
-        queryKey: ['posts', boardId, page],
-        queryFn: () => getActivityPostsPaging({ boardId, page }),
-      })
-    }
-  }, [data, isPlaceholderData, page, queryClient])
 
   if (status === 'pending')
     return <div className="flex w-full justify-center">loading...</div>

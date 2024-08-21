@@ -1,9 +1,7 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { Block, BlockNoteEditor, PartialBlock } from '@blocknote/core'
 import { BlockNoteView } from '@blocknote/mantine'
 import '@blocknote/mantine/style.css'
 import { useCreateBlockNote } from '@blocknote/react'
@@ -11,7 +9,7 @@ import { useCreateBlockNote } from '@blocknote/react'
 import { FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { CreatePost } from '@/schema/post'
 
-export const PostContentFieldEditor = () => {
+const PostContentFieldEditor = () => {
   const { control } = useFormContext<CreatePost>()
 
   const editor = useCreateBlockNote({ initialContent: [{}] })
@@ -35,3 +33,5 @@ export const PostContentFieldEditor = () => {
     />
   )
 }
+
+export default PostContentFieldEditor
