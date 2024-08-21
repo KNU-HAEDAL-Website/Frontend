@@ -1,38 +1,22 @@
-import { getDateDistance, getDateDistanceText } from '@toss/date'
+import { getDateDistance, kstFormat } from '@toss/date'
 
 export const formatDateDistanceFromToday = (date: Date) => {
   const today = new Date()
   const distance = getDateDistance(date, today)
 
-  if (distance.days > 3) {
-    return undefined
+  const seconds = distance.seconds
+  const minutes = distance.minutes
+  const days = distance.days
+
+  if (days > 1) {
+    return date.toLocaleDateString()
   }
 
-  if (distance.days < 1) {
-    if (distance.hours < 1) {
-      const distanceText = getDateDistanceText(distance, {
-        days: () => false,
-        hours: () => false,
-        seconds: () => false,
-      })
+  if (days > 0) return `${days}일 전`
 
-      return distance.minutes < 1 ? '방금 전' : `${distanceText} 전`
-    }
+  if (minutes > 0) return kstFormat(date, 'HH:mm')
 
-    const distanceText = getDateDistanceText(distance, {
-      days: () => false,
-      minutes: () => false,
-      seconds: () => false,
-    })
+  if (seconds > 0) return seconds === 1 ? '방금 전' : `${seconds}초 전`
 
-    return `${distanceText} 전`
-  }
-
-  const distanceText = getDateDistanceText(distance, {
-    hours: () => false,
-    minutes: () => false,
-    seconds: () => false,
-  })
-
-  return `${distanceText} 전`
+  return '방금 전'
 }
