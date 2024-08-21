@@ -13,6 +13,7 @@ export const DATA_ERROR_MESSAGES = {
   SEMESTER_NOT_FOUND: '학기를 불러오는 데 오류가 발생했습니다.',
   ACTIVITY_NOT_FOUND: '활동을 불러오는 데 오류가 발생했습니다.',
   BOARD_DETAIL_NOT_FOUND: '게시판 정보를 불러오는 데 오류가 발생했습니다.',
+  POST_NOT_FOUND: '게시글을 불러오는 데 오류가 발생했습니다.',
 }
 
 export const ACCESS_ERROR_MESSAGE = {

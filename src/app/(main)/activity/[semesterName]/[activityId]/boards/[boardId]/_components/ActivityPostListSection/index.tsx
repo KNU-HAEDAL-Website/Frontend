@@ -1,9 +1,8 @@
-import { useEffect } from 'react'
-
 import { useSearchParams } from 'next/navigation'
 
 import { PaginationButtons } from '@/components/PaginationButtons'
 import { PostTable } from '@/components/Table/PostTable'
+import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
 import { useGetActivityPostsPaging } from '@/service/data/post'
 
 type ActivityPostListSectionProps = {
@@ -28,7 +27,20 @@ export const ActivityPostListSection = ({
     return <div className="flex w-full justify-center">loading...</div>
 
   if (!data) {
-    return <div>게시글이 없습니다.</div>
+    throw new Error(DATA_ERROR_MESSAGES.POST_NOT_FOUND)
+  }
+
+  if (!data.posts.length) {
+    return (
+      <div className="flex flex-col items-center gap-6">
+        <PostTable
+          posts={data.posts}
+          pageNumber={page}
+          pageSize={data.pageInfo.pageSize}
+        />
+        <div>게시글이 없습니다.</div>
+      </div>
+    )
   }
 
   return (
