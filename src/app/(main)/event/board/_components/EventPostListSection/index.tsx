@@ -5,7 +5,7 @@ import { Suspense, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 
 import { PaginationButtons } from '@/components/PaginationButtons'
-import { PostTable } from '@/components/Table/PostTable'
+import { PostTable } from '@/components/PostTable'
 import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
 import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { useGetPostsPaging } from '@/service/data/post'

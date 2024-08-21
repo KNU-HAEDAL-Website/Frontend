@@ -1,6 +1,8 @@
 'use client'
 
 import { flexRender, Table as tanskTable } from '@tanstack/react-table'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import {
   Table,
@@ -10,12 +12,15 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Post } from '@/types/post'
 
-interface TableContentProps<T> {
-  table: tanskTable<T>
+interface PostTableContentProps {
+  table: tanskTable<Post>
 }
 
-export function TableContent<T>({ table }: TableContentProps<T>) {
+export function PostTableContent({ table }: PostTableContentProps) {
+  const pathName = usePathname()
+
   return (
     <Table>
       <TableHeader>
@@ -41,7 +46,9 @@ export function TableContent<T>({ table }: TableContentProps<T>) {
           <TableRow key={row.id}>
             {row.getVisibleCells().map((cell) => (
               <TableCell key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                <Link href={`${pathName}/posts/${row.getValue('postId')}`}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </Link>
               </TableCell>
             ))}
           </TableRow>
