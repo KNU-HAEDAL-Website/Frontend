@@ -1,11 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import {
   Carousel,
   CarouselContent,
+  CarouselDots,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
@@ -17,6 +19,8 @@ type EventCarouselProps = {
 }
 
 export function EventCarousel({ posts }: EventCarouselProps) {
+  const router = useRouter()
+
   return (
     <Carousel
       opts={{ loop: true }}
@@ -26,7 +30,10 @@ export function EventCarousel({ posts }: EventCarouselProps) {
         {posts.map((post) => (
           <CarouselItem key={post.postId}>
             <div className="p-1">
-              <Card>
+              <Card
+                onClick={() => router.push(`/event/board/posts/${post.postId}`)}
+                className="cursor-pointer"
+              >
                 <CardContent className="relative flex aspect-video flex-col p-0">
                   <div className="flex w-full flex-1 items-center justify-center overflow-hidden rounded-xl">
                     <Image
@@ -47,6 +54,7 @@ export function EventCarousel({ posts }: EventCarouselProps) {
           </CarouselItem>
         ))}
       </CarouselContent>
+      <CarouselDots className="pt-2" />
       <div className="flex w-full justify-end pr-4">
         <Link href="/event/board">
           <Button variant="link" className="h-fit p-0 text-primary/60">
