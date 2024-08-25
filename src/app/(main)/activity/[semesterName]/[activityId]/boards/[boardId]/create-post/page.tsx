@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect } from 'react'
+
 import { ACCESS_ERROR_MESSAGE } from '@/constant/errorMessage'
 import { useMyInfoStore } from '@/store/myInfo'
 import { Role } from '@/types/user'
@@ -17,8 +19,11 @@ type CreatePostPageParams = {
 const CreateActivityPostPage = ({ params }: CreatePostPageParams) => {
   const { role } = useMyInfoStore((state) => state.getMyInfo())
 
-  if (!role?.includes(role as Role))
-    throw new Error(ACCESS_ERROR_MESSAGE.UNAUTHORIZED_ERROR)
+  useEffect(() => {
+    if (!role?.includes(role as Role)) {
+      throw new Error(ACCESS_ERROR_MESSAGE.UNAUTHORIZED_ERROR)
+    }
+  }, [role])
 
   return (
     <div className="flex flex-col gap-6 py-10">

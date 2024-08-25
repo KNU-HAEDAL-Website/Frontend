@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect } from 'react'
+
 import { ACCESS_ERROR_MESSAGE } from '@/constant/errorMessage'
 import { useMyInfoStore } from '@/store/myInfo'
 
@@ -9,8 +11,11 @@ import { CreateNoticePostHero } from './_components/CreateNoticePostHero'
 const CreateNoticePost = () => {
   const { role } = useMyInfoStore((state) => state.getMyInfo())
 
-  if (role !== '해구르르')
-    throw new Error(ACCESS_ERROR_MESSAGE.UNAUTHORIZED_ERROR)
+  useEffect(() => {
+    if (role !== '해구르르') {
+      throw new Error(ACCESS_ERROR_MESSAGE.UNAUTHORIZED_ERROR)
+    }
+  }, [role])
 
   return (
     <div className="flex flex-col gap-6">
