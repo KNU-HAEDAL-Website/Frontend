@@ -16,7 +16,7 @@ export const MobileNavigation = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <HamburgerMenuIcon />
+        <HamburgerMenuIcon className="h-auto w-6" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mt-4">
         {navigationLinks.map((route) => (
