@@ -48,14 +48,13 @@ export const createActivityPostAction = actionClient
 
         if (!activityDate.start) throw new Error('날짜 입력 에러')
 
-        const tempDateFormat = kstFormat(activityDate.start, 'yyyy-MM-dd') // date input 수정 전까지 임시 날짜 사용
-
         const createActivityPostRequest: CreatePostRequest = {
           postTitle,
           postContent,
           postImageUrl: imageUrl,
-          postActivityStartDate: tempDateFormat,
-          postActivityEndDate: tempDateFormat,
+          postActivityStartDate: kstFormat(activityDate.start, 'yyyy-MM-dd'),
+          postActivityEndDate:
+            activityDate.end && kstFormat(activityDate.end, 'yyyy-MM-dd'),
           postType: 'ACTIVITY',
         }
 
@@ -95,14 +94,13 @@ export const createEventPostAction = actionClient
 
         if (!activityDate.start) throw new Error('날짜 입력 에러')
 
-        const tempDateFormat = kstFormat(activityDate.start, 'yyyy-MM-dd') // date input 수정 전까지 임시 날짜 사용
-
         const createActivityPostRequest: CreatePostRequest = {
           postTitle,
           postContent,
           postImageUrl: imageUrl,
-          postActivityStartDate: tempDateFormat,
-          postActivityEndDate: tempDateFormat,
+          postActivityStartDate: kstFormat(activityDate.start, 'yyyy-MM-dd'),
+          postActivityEndDate:
+            activityDate.end && kstFormat(activityDate.end, 'yyyy-MM-dd'),
           postType: 'EVENT',
         }
 
@@ -142,14 +140,10 @@ export const createNoticePostAction = actionClient
 
         if (!activityDate.start) throw new Error('날짜 입력 에러')
 
-        const tempDateFormat = kstFormat(activityDate.start, 'yyyy-MM-dd') // date input 수정 전까지 임시 날짜 사용
-
         const createActivityPostRequest: CreatePostRequest = {
           postTitle,
           postContent,
           postImageUrl: imageUrl,
-          postActivityStartDate: tempDateFormat,
-          postActivityEndDate: tempDateFormat,
           postType: 'NOTICE',
         }
 
