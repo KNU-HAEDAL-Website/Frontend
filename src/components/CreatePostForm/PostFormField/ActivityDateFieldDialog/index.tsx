@@ -1,4 +1,8 @@
+import { useState } from 'react'
+import { DateRange } from 'react-day-picker'
 import { useFormContext } from 'react-hook-form'
+
+import { getDateDistance } from '@toss/date'
 
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -19,6 +23,11 @@ import { DateDialogTriggerButton } from './DateDialogTriggerButton'
 
 export const ActivityDateFieldDialog = () => {
   const { control, setValue } = useFormContext<CreatePost>()
+
+  const [date, setDate] = useState<DateRange | undefined>({
+    from: undefined,
+    to: undefined,
+  })
 
   return (
     <FormField
@@ -43,27 +52,26 @@ export const ActivityDateFieldDialog = () => {
                   </DialogHeader>
                   <div className="flex justify-center">
                     <Calendar
+                      autoFocus
                       mode="range"
-                      selected={{
-                        from: field.value.start!,
-                        to: field.value.end,
+                      selected={date}
+                      onSelect={(range) => {
+                        setDate(range)
+                        setValue('activityDate', {
+                          start: range?.from,
+                          end:
+                            range?.from &&
+                            range?.to &&
+                            getDateDistance(range.from, range.to).days === 0
+                              ? undefined
+                              : range?.to,
+                        })
                       }}
-                      onSelect={(range) => field.onChange(range)}
                     />
                   </div>
                   <DialogFooter>
                     <DialogClose asChild>
-                      <Button
-                        className="w-fit"
-                        onClick={() => {
-                          setValue('activityDate', {
-                            start: new Date(), //TODO: field.value.start
-                            end: field.value.end,
-                          })
-                        }}
-                      >
-                        저장하기
-                      </Button>
+                      <Button className="w-fit">저장하기</Button>
                     </DialogClose>
                   </DialogFooter>
                 </DialogContent>
