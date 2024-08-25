@@ -20,12 +20,16 @@ type CreatePostFormProps<T extends FieldValues> = {
   form: UseFormReturn<T>
   onSubmit: (values: T) => void
   isExecuting: boolean
+  isActivityDateRequired?: boolean
+  isImageRequired?: boolean
 }
 
 export const CreatePostForm = <T extends FieldValues>({
   form,
   onSubmit,
   isExecuting,
+  isActivityDateRequired = true,
+  isImageRequired = true,
 }: CreatePostFormProps<T>) => {
   return (
     <Form {...form}>
@@ -36,14 +40,16 @@ export const CreatePostForm = <T extends FieldValues>({
         <PostFormField name="postTitle" label="게시글 제목">
           {(field) => <Input {...field} />}
         </PostFormField>
-        <ActivityDateFieldDialog />
+        {isActivityDateRequired && <ActivityDateFieldDialog />}
         <Seperator />
         <div>게시글 내용 작성하기</div>
         <PostContentFieldEditor />
         <Seperator />
-        <PostFormField name="imageFile" label="게시글 대표 사진">
-          {(field) => <ImageInput field={field} />}
-        </PostFormField>
+        {isImageRequired && (
+          <PostFormField name="imageFile" label="게시글 대표 사진">
+            {(field) => <ImageInput field={field} />}
+          </PostFormField>
+        )}
         <div className="flex justify-end">
           <Button type="submit" disabled={isExecuting}>
             게시글 업로드

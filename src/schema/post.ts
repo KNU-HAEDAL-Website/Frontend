@@ -33,3 +33,13 @@ export const CreateActivityPostSchema = CreatePostSchema.extend({
 })
 
 export type CreateActivityPost = z.infer<typeof CreateActivityPostSchema>
+
+export const CreateNoticePostSchema = z.object({
+  postTitle: z
+    .string()
+    .min(1, { message: '게시글 제목을 입력해주세요.' })
+    .max(50, { message: '게시글 제목은 50자 이내이어야 합니다.' }),
+  postContent: z.string().min(1, { message: '게시글 제목을 입력해주세요.' }),
+})
+
+export type CreateNoticePost = z.infer<typeof CreateNoticePostSchema>

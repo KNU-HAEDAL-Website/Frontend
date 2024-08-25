@@ -9,7 +9,7 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import { CreatePostForm } from '@/components/CreatePostForm'
 import { useToast } from '@/components/ui/use-toast'
-import { CreatePost, CreatePostSchema } from '@/schema/post'
+import { CreateNoticePost, CreateNoticePostSchema } from '@/schema/post'
 import { createNoticePostAction } from '@/service/server/post/create-post'
 
 export const CreateNoticePostForm = () => {
@@ -25,16 +25,11 @@ export const CreateNoticePostForm = () => {
     isExecuting,
   } = useAction(createNoticePostAction)
 
-  const form = useForm<CreatePost>({
-    resolver: zodResolver(CreatePostSchema),
+  const form = useForm<CreateNoticePost>({
+    resolver: zodResolver(CreateNoticePostSchema),
     defaultValues: {
       postTitle: '',
       postContent: '',
-      imageFile: new File([], ''),
-      activityDate: {
-        start: undefined,
-        end: undefined,
-      },
     },
   })
 
@@ -61,6 +56,8 @@ export const CreateNoticePostForm = () => {
       form={form}
       onSubmit={(values) => createPost(values)}
       isExecuting={isExecuting}
+      isActivityDateRequired={false}
+      isImageRequired={false}
     />
   )
 }
