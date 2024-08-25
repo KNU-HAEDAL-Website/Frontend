@@ -1,8 +1,17 @@
-import { ReactNode } from 'react'
+import { HTMLAttributes } from 'react'
 
-export const Content = ({ children }: { children: ReactNode }) => {
+import { cn } from '@/lib/utils'
+
+interface ContentProps extends HTMLAttributes<HTMLDivElement> {}
+
+export const Content = ({ className, children }: ContentProps) => {
   return (
-    <div className="mx-auto flex h-full max-w-screen-2xl justify-center">
+    <div
+      className={cn(
+        'mx-auto flex h-full max-w-screen-2xl justify-center',
+        className,
+      )}
+    >
       {children}
     </div>
   )
