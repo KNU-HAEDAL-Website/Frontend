@@ -1,16 +1,31 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
+
+import { usePathname, useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
+import { useMyInfoStore } from '@/store/myInfo'
 
 export const CreateNoticePostButton = () => {
   const pathName = usePathname()
+  const router = useRouter()
+
+  const { role } = useMyInfoStore((state) => state.getMyInfo())
+  const [disabled, setDisabled] = useState(true)
+
+  useEffect(() => {
+    setDisabled(!(role === '해구르르'))
+  }, [role])
+
+  if (disabled) return null
 
   return (
-    <Link href={`${pathName}/create-post`}>
-      <Button>공지사항 작성하기</Button>
-    </Link>
+    <Button
+      onClick={() => router.push(`${pathName}/create-post`)}
+      disabled={disabled}
+    >
+      공지사항 작성하기
+    </Button>
   )
 }
