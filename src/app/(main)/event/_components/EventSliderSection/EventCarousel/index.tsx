@@ -20,7 +20,7 @@ export function EventCarousel({ posts }: EventCarouselProps) {
   return (
     <Carousel
       opts={{ loop: true }}
-      className="w-full max-w-52 xs:max-w-sm sm:max-w-xl xl:max-w-screen-xl"
+      className="w-full max-w-52 xs:max-w-sm sm:max-w-xl"
     >
       <CarouselContent>
         {posts.map((post) => (
