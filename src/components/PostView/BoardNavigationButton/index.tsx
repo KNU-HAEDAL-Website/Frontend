@@ -7,7 +7,7 @@ export const BoardNavigationButton = () => {
   const router = useRouter()
 
   return (
-    <div className="flex justify-end">
+    <div className="flex justify-end pt-20">
       <Button onClick={router.back} variant="link">
         <div>게시판으로 이동하기</div>
         <ArrowRightIcon />
