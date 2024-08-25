@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 
+import { BoardNavigationButton } from '@/components/PostView/BoardNavigationButton'
 import { PostDetail } from '@/components/PostView/PostDetail'
 import { useGetPost } from '@/service/data/post'
 
@@ -25,6 +26,7 @@ export const ActivityPostSection = ({ postId }: ActivityPostSectionProps) => {
     <div>
       <PostDetail post={post} />
       <PostContent content={post.postContent} />
+      <BoardNavigationButton />
     </div>
   )
 }
