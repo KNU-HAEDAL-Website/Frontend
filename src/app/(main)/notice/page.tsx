@@ -4,7 +4,7 @@ import { NoticePostListSection } from './_components/NoticePostListSection'
 
 const NoticeBoardPage = () => {
   return (
-    <div className="flex w-full max-w-screen-xl flex-col gap-10 px-12 pb-20 pt-10 sm:px-20">
+    <div className="flex flex-col gap-10">
       <NoticeBoardHero />
       <NoticePostListSection />
       <div className="flex w-full justify-end">
