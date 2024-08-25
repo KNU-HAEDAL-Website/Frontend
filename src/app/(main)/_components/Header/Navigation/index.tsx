@@ -22,11 +22,11 @@ export const navigationLinks = [
     href: '/event',
   },
   {
-    name: 'Member',
-    href: '/member',
-  },
-  {
     name: 'Notice',
     href: '/notice',
+  },
+  {
+    name: 'Recruit',
+    href: '/recruit',
   },
 ] as const
