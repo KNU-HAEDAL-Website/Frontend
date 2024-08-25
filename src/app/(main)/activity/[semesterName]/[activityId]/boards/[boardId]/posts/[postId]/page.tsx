@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+'use client'
 
 import { ActivityPostHero } from './_components/ActivityPostHero'
 import { ActivityPostSection } from './_components/ActivityPostSection'
@@ -14,13 +14,11 @@ type PostPageParams = {
 const PostPage = ({ params }: PostPageParams) => {
   return (
     <div className="pt-10">
-      <Suspense fallback={<div>loading...</div>}>
-        <ActivityPostHero
-          activityId={Number(params.activityId)}
-          boardId={Number(params.boardId)}
-        />
-        <ActivityPostSection postId={Number(params.postId)} />
-      </Suspense>
+      <ActivityPostHero
+        activityId={Number(params.activityId)}
+        boardId={Number(params.boardId)}
+      />
+      <ActivityPostSection postId={Number(params.postId)} />
     </div>
   )
 }

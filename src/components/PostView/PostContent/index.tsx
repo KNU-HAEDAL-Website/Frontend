@@ -10,7 +10,7 @@ type PostContentProps = {
   content: string
 }
 
-export const PostContent = ({ content }: PostContentProps) => {
+const PostContent = ({ content }: PostContentProps) => {
   const initialContent = (JSON.parse(content) as PartialBlock[]) ?? undefined
 
   const editor = BlockNoteEditor.create({ initialContent })
@@ -19,3 +19,5 @@ export const PostContent = ({ content }: PostContentProps) => {
     <BlockNoteView editor={editor} editable={false} data-theming-css-demo />
   )
 }
+
+export default PostContent
