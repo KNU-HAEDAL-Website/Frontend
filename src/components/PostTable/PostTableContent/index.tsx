@@ -1,5 +1,7 @@
 'use client'
 
+import { HTMLAttributes } from 'react'
+
 import { flexRender, Table as tanskTable } from '@tanstack/react-table'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -14,7 +16,7 @@ import {
 } from '@/components/ui/table'
 import { Post } from '@/types/post'
 
-interface PostTableContentProps {
+interface PostTableContentProps extends HTMLAttributes<HTMLTableElement> {
   table: tanskTable<Post>
 }
 

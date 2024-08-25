@@ -9,8 +9,6 @@ import { useCreateBlockNote } from '@blocknote/react'
 import { FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { CreatePost } from '@/schema/post'
 
-import './styles.css'
-
 const PostContentFieldEditor = () => {
   const { control } = useFormContext<CreatePost>()
 
@@ -26,7 +24,6 @@ const PostContentFieldEditor = () => {
             editor={editor}
             onChange={() => field.onChange(JSON.stringify(editor.document))}
             className="h-96 overflow-auto rounded-md border pt-4"
-            data-theming-css-demo
           />
           <div className="flex justify-end">
             <FormMessage />

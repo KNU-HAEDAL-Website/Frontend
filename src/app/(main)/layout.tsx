@@ -6,7 +6,7 @@ import { Header } from './_components/Header'
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="flex min-h-screen w-full flex-col">
-      <div className="fixed h-16 w-full bg-primary text-white">
+      <div className="fixed z-40 h-16 w-full bg-primary text-white">
         <Content>
           <Header />
         </Content>
