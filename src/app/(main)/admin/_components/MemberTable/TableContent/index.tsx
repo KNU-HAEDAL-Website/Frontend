@@ -17,7 +17,7 @@ interface TableContentProps<T> {
 
 export function MemberTableContent<T>({ table }: TableContentProps<T>) {
   return (
-    <Table>
+    <Table className="w-full">
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>

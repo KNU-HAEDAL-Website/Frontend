@@ -57,5 +57,9 @@ export const ChangeRoleTable = () => {
     },
   ]
 
-  return <MemberTable data={activeUsers} columns={changeRoleColumn} />
+  return (
+    <div className="flex w-full max-w-screen-lg">
+      <MemberTable data={activeUsers} columns={changeRoleColumn} />
+    </div>
+  )
 }
