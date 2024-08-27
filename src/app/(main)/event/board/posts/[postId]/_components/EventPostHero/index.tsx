@@ -1,12 +1,12 @@
 import { NavLink, PageBreadcrumb } from '@/components/PageBreadcrumb'
-import { Seperator } from '@/components/ui/seperator'
+import { Separator } from '@/components/ui/separator'
 
 export const EventPostHero = () => {
   return (
     <div>
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
       <PageBreadcrumb navLinks={EventPageNavLinks} />
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
     </div>
   )
 }

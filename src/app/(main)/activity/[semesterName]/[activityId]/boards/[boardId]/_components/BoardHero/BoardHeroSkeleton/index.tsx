@@ -1,11 +1,11 @@
 import { ChevronRightIcon } from '@radix-ui/react-icons'
 
-import { Seperator } from '@/components/ui/seperator'
+import { Separator } from '@/components/ui/separator'
 
 export const BoardHeroSkeleton = () => {
   return (
     <div className="flex animate-pulse flex-col">
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
       <div className="my-4 flex items-center gap-1.5 pb-1">
         <div className="h-5 w-12 rounded-lg bg-slate-200"></div>
         <ChevronRightIcon className="text-muted-foreground" />
@@ -18,7 +18,7 @@ export const BoardHeroSkeleton = () => {
       <div className="flex py-4">
         <div className="h-5 w-40 bg-primary/20"></div>
       </div>
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
     </div>
   )
 }

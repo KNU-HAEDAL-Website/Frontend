@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { usePathname } from 'next/navigation'
 
 import { NavLink } from '@/components/PageBreadcrumb'
-import { Seperator } from '@/components/ui/seperator'
+import { Separator } from '@/components/ui/separator'
 import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
 import { boardDetailQuery } from '@/service/data/boards'
 
@@ -35,9 +35,9 @@ export const CreateActivityPostHero = ({
 
   return (
     <div>
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
       <ActivityBreadcrumb navLinks={navLinks} pageName="게시글 생성하기" />
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
     </div>
   )
 }

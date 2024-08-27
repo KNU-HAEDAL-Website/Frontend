@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { Seperator } from '@/components/ui/seperator'
+import { Separator } from '@/components/ui/separator'
 import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
 import { boardDetailQuery } from '@/service/data/boards'
 
@@ -24,13 +24,13 @@ export const BoardHero = ({ boardId, activityId }: BoardHeroProps) => {
 
   return (
     <div className="flex flex-col">
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
       <ActivityBreadcrumb
         navLinks={[]}
         pageName={`${boardDetail.boardName} 게시판`}
       />
       <BoardDetail board={boardDetail} />
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
     </div>
   )
 }

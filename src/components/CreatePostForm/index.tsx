@@ -6,7 +6,7 @@ import { ImageInput } from '@/components/ImageInput'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Seperator } from '@/components/ui/seperator'
+import { Separator } from '@/components/ui/separator'
 
 import { PostFormField } from './PostFormField'
 import { ActivityDateFieldDialog } from './PostFormField/ActivityDateFieldDialog'
@@ -41,10 +41,10 @@ export const CreatePostForm = <T extends FieldValues>({
           {(field) => <Input {...field} />}
         </PostFormField>
         {isActivityDateRequired && <ActivityDateFieldDialog />}
-        <Seperator />
+        <Separator />
         <div>게시글 내용 작성하기</div>
         <PostContentFieldEditor />
-        <Seperator />
+        <Separator />
         {isImageRequired && (
           <PostFormField name="imageFile" label="게시글 대표 사진">
             {(field) => <ImageInput field={field} />}

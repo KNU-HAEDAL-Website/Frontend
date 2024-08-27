@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 
-import { Seperator } from '@/components/ui/seperator'
+import { Separator } from '@/components/ui/separator'
 import { PostView } from '@/types/post'
 
 type PostDetailProps = {
@@ -25,7 +25,7 @@ export const PostDetail = ({ post }: PostDetailProps) => {
           {post.postActivityEndDate && <div>~{post.postActivityEndDate}</div>}
         </div>
       </div>
-      <Seperator />
+      <Separator />
     </div>
   )
 }
@@ -43,7 +43,7 @@ export const NoticePostDetail = ({ post }: PostDetailProps) => {
           <div className="text-primary/60">조회 {post.postViews}</div>
         </div>
       </div>
-      <Seperator />
+      <Separator />
     </div>
   )
 }

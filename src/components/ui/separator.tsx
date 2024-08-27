@@ -4,7 +4,7 @@ import { VariantProps, cva } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
-const seperatorVariants = cva('border-none', {
+const separatorVariants = cva('border-none', {
   variants: {
     variant: {
       light: 'bg-input',
@@ -21,19 +21,19 @@ const seperatorVariants = cva('border-none', {
   },
 })
 
-interface SeperatorProps
+interface SeparatorProps
   extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof seperatorVariants> {}
+    VariantProps<typeof separatorVariants> {}
 
-export const Seperator = ({
+export const Separator = ({
   variant,
   orientation,
   className,
   ...props
-}: SeperatorProps) => {
+}: SeparatorProps) => {
   return (
     <hr
-      className={cn(seperatorVariants({ variant, orientation, className }))}
+      className={cn(separatorVariants({ variant, orientation, className }))}
       {...props}
     />
   )

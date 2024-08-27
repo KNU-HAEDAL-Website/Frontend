@@ -1,12 +1,12 @@
 import { PageBreadcrumb } from '@/components/PageBreadcrumb'
-import { Seperator } from '@/components/ui/seperator'
+import { Separator } from '@/components/ui/separator'
 
 export const NoticeBoardHero = () => {
   return (
     <div className="flex w-full flex-col">
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
       <PageBreadcrumb navLinks={[]} pageName="공지사항 게시판" />
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
     </div>
   )
 }

@@ -3,7 +3,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { usePathname } from 'next/navigation'
 
-import { Seperator } from '@/components/ui/seperator'
+import { Separator } from '@/components/ui/separator'
 import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
 import { boardDetailQuery } from '@/service/data/boards'
 
@@ -36,9 +36,9 @@ export const ActivityPostHero = ({
 
   return (
     <div className="flex flex-col">
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
       <ActivityBreadcrumb navLinks={navLinks} />
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
     </div>
   )
 }

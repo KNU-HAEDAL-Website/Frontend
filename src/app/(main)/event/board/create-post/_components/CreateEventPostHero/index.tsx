@@ -1,12 +1,12 @@
 import { NavLink, PageBreadcrumb } from '@/components/PageBreadcrumb'
-import { Seperator } from '@/components/ui/seperator'
+import { Separator } from '@/components/ui/separator'
 
 export const CreateEventPostHero = () => {
   return (
     <div>
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
       <PageBreadcrumb navLinks={EventPageNavLinks} pageName="게시글 생성하기" />
-      <Seperator variant="dark" />
+      <Separator variant="dark" />
     </div>
   )
 }
