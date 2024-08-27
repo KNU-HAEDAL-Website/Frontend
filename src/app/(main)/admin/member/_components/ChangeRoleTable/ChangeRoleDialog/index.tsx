@@ -1,21 +1,41 @@
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { ActiveUser } from '@/types/user'
 
+import { ChangeRoleDialogForm } from './DialogForm'
+
 type ChangeRoleDialogProps = {
-  member: ActiveUser
+  user: ActiveUser
 }
 
-export const ChangeRoleDialog = ({ member }: ChangeRoleDialogProps) => {
+export const ChangeRoleDialog = ({ user }: ChangeRoleDialogProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary" className="h-fit p-1.5 text-sm">
-          {member.role}
+        <Button
+          variant="secondary"
+          className="h-fit px-2 py-1.5 text-sm hover:bg-primary/5"
+        >
+          {user.role}
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <div>팝업 테스트</div>
+        <DialogHeader>
+          <DialogTitle className="text-md flex gap-2">
+            {user.userName}({user.studentNumber}) 권한 설정
+          </DialogTitle>
+          <DialogDescription className="text-start">
+            변경 할 등급을 선택해주세요.
+          </DialogDescription>
+        </DialogHeader>
+        <ChangeRoleDialogForm user={user} />
       </DialogContent>
     </Dialog>
   )

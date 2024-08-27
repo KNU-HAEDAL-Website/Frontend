@@ -45,10 +45,11 @@ export const ChangeRoleTable = () => {
       accessorKey: 'role',
       header: '등급',
       cell: ({ row }) => {
-        const member = row.original
+        const user = row.original
+
         return (
           <div className="flex justify-center">
-            <ChangeRoleDialog member={member} />
+            <ChangeRoleDialog user={user} />
           </div>
         )
       },

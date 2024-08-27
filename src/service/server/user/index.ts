@@ -20,21 +20,19 @@ type AdminUsersParams = {
   isActive: boolean
 }
 
-type AdminUsersResponse = {
-  users: ActiveUser[]
-}
-
 export const getAdminUsers = async ({ isActive }: AdminUsersParams) => {
   try {
-    const response = await AUTHORIZATION_API.get<AdminUsersResponse>(
+    const response = await AUTHORIZATION_API.get<ActiveUser[]>(
       getAdminUsersPath({ isActive }),
     )
 
-    return response.data.users
+    return response.data
   } catch (error) {
     if (error instanceof AxiosError) {
       throw new Error(ACCESS_ERROR_MESSAGE.UNAUTHORIZED_ERROR)
     }
+
+    return undefined
   }
 }
 

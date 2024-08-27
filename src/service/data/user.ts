@@ -18,6 +18,6 @@ export const useGetUsers = () => {
 export const useGetActiveUsers = () => {
   return useQuery({
     queryKey: ['admin', 'users', 'active'],
-    queryFn: async () => getAdminUsers({ isActive: true }),
+    queryFn: () => getAdminUsers({ isActive: true }),
   })
 }
