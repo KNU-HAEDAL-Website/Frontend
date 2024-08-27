@@ -5,7 +5,8 @@ import { ColumnDef } from '@tanstack/react-table'
 import { useGetActiveUsers } from '@/service/data/user'
 import { ActiveUser } from '@/types/user'
 
-import { MemberTable } from '../MemberTable'
+import { MemberTable } from '~admin/_components/MemberTable'
+
 import { ChangeRoleDialog } from './ChangeRoleDialog'
 
 export const ChangeRoleTable = () => {

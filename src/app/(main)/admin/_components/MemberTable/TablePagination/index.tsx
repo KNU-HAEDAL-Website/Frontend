@@ -4,9 +4,9 @@ import { Table } from '@tanstack/react-table'
 
 import {
   Pagination,
+  PaginationButton,
   PaginationContent,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
@@ -41,13 +41,12 @@ export function MemberTablePagination<T>({
 
           return (
             <PaginationItem key={pageNum}>
-              <PaginationLink
-                href=""
+              <PaginationButton
                 onClick={() => table.setPageIndex(pageNum - 1)}
                 isActive={isActive}
               >
                 {pageNum}
-              </PaginationLink>
+              </PaginationButton>
             </PaginationItem>
           )
         })}
