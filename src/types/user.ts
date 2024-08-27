@@ -8,4 +8,5 @@ export type Role = '해구르르' | '팀장' | '일반'
 
 export type ActiveUser = User & {
   role: Role
+  regDate?: string
 }
