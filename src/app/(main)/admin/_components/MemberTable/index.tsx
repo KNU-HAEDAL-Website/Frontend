@@ -47,7 +47,7 @@ export function MemberTable<T>({ data, columns }: MemberTableProps<T>) {
   )
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 pb-20">
       <MemberTableFilter table={table} />
       <MemberTableContent table={table} />
       <MemberTablePagination table={table} pageNumList={pageNumList} />

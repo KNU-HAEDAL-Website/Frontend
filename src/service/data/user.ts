@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { queryOptions, useQuery, useSuspenseQuery } from '@tanstack/react-query'
 
 import { getAdminUsers, getUsers } from '@/service/server/user'
 
@@ -15,9 +15,12 @@ export const useGetUsers = () => {
   return { users, status, error }
 }
 
-export const useGetActiveUsers = () => {
-  return useQuery({
+export const activeUsersQuery = () =>
+  queryOptions({
     queryKey: ['admin', 'users', 'active'],
     queryFn: () => getAdminUsers({ isActive: true }),
   })
+
+export const useGetActiveUsers = () => {
+  return useQuery(activeUsersQuery())
 }
