@@ -24,3 +24,13 @@ export const activeUsersQuery = () =>
 export const useGetActiveUsers = () => {
   return useQuery(activeUsersQuery())
 }
+
+export const inActiveUsersQuery = () =>
+  queryOptions({
+    queryKey: ['admin', 'users', 'inactive'],
+    queryFn: () => getAdminUsers({ isActive: false }),
+  })
+
+export const useGetInActiveUsers = () => {
+  return useQuery(inActiveUsersQuery())
+}

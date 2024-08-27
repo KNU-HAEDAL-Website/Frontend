@@ -18,10 +18,16 @@ const AdminMemberPage = () => {
           <TabsTrigger value="approve-member">멤버 승인</TabsTrigger>
           <TabsTrigger value="expel-member">내보내기</TabsTrigger>
         </TabsList>
-        <TabsContent value="change-role" className="flex w-full justify-center">
+        <TabsContent
+          value="change-role"
+          className="flex w-full justify-center pt-4"
+        >
           <ChangeRoleTable />
         </TabsContent>
-        <TabsContent value="approve-member">
+        <TabsContent
+          value="approve-member"
+          className="flex w-full justify-center"
+        >
           <ApproveMemberTable />
         </TabsContent>
         <TabsContent value="expel-member">

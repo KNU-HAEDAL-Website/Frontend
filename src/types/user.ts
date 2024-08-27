@@ -10,3 +10,5 @@ export type ActiveUser = User & {
   role: Role
   regDate?: string
 }
+
+export type InActiveUser = ActiveUser
