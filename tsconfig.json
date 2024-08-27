@@ -23,7 +23,8 @@
       "~activity/*": ["./src/app/(main)/activity/*"],
       "~create-post/*": [
         "./src/app/(main)/activity/[semesterName]/[activityId]/boards/[boardId]/create-post/*"
-      ]
+      ],
+      "~admin/*": ["./src/app/(main)/admin/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
