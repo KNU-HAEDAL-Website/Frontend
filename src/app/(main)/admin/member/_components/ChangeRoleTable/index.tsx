@@ -6,13 +6,14 @@ import { useGetActiveUsers } from '@/service/data/user'
 import { ActiveUser } from '@/types/user'
 
 import { MemberTable } from '~admin/_components/MemberTable'
+import { SkeletonTable } from '~admin/_components/SkeletonTable'
 
 import { ChangeRoleDialog } from './ChangeRoleDialog'
 
 export const ChangeRoleTable = () => {
   const { data: activeUsers, status, error } = useGetActiveUsers()
 
-  if (status === 'pending') return <div>로딩</div>
+  if (status === 'pending') return <SkeletonTable />
 
   if (error) return <div>{error.message}</div>
 
