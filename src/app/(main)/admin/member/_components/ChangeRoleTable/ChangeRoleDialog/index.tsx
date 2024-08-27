@@ -21,7 +21,7 @@ export const ChangeRoleDialog = ({ user }: ChangeRoleDialogProps) => {
       <DialogTrigger asChild>
         <Button
           variant="secondary"
-          className="h-fit px-2 py-1.5 text-sm hover:bg-primary/5"
+          className="h-fit w-16 py-1.5 text-sm hover:bg-primary/5"
         >
           {user.role}
         </Button>

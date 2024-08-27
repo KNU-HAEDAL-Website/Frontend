@@ -18,4 +18,5 @@ export const DATA_ERROR_MESSAGES = {
 
 export const ACCESS_ERROR_MESSAGE = {
   UNAUTHORIZED_ERROR: '해당 페이지에 접근 할 권한이 없습니다.',
+  TOKEN_ERROR: '다시 로그인해주세요.',
 }
