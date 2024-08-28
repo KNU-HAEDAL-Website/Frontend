@@ -5,7 +5,7 @@ import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { getSemesters } from '@/service/server/semester'
 import { Semester } from '@/types/activity'
 
-const semesterQuery = () =>
+export const semesterQuery = () =>
   queryOptions({
     queryKey: ['semesters'],
     queryFn: async () => getSemesters(),
