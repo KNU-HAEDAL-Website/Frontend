@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -27,9 +27,17 @@ import {
 import { ToastAction } from '@/components/ui/toast'
 import { useToast } from '@/components/ui/use-toast'
 import { AddSemester, AddSemesterSchema } from '@/schema/admin'
+import { queryClient } from '@/service/components/ReactQueryClientProvider'
+import { semesterQuery } from '@/service/data/semester'
 import { AddSemesterAction } from '@/service/server/semester/add-semester'
 
-export const AddSemesterDialogForm = () => {
+type AddSemesterDialogFormProps = {
+  setOpen: Dispatch<SetStateAction<boolean>>
+}
+
+export const AddSemesterDialogForm = ({
+  setOpen,
+}: AddSemesterDialogFormProps) => {
   const {
     execute: addSemester,
     result,
@@ -56,6 +64,12 @@ export const AddSemesterDialogForm = () => {
         duration: 1000,
       })
 
+      const { queryKey } = semesterQuery()
+
+      queryClient.invalidateQueries({ queryKey })
+
+      setOpen(false)
+
       return
     }
 
@@ -80,7 +94,7 @@ export const AddSemesterDialogForm = () => {
         title: result.data.message,
       })
     }
-  }, [result, toast, router])
+  }, [result, toast, router, setOpen])
 
   return (
     <Form {...form}>
