@@ -30,7 +30,10 @@ const AdminMemberPage = () => {
         >
           <ApproveMemberTable />
         </TabsContent>
-        <TabsContent value="expel-member">
+        <TabsContent
+          value="expel-member"
+          className="flex w-full justify-center"
+        >
           <ExpelMemberTable />
         </TabsContent>
       </Tabs>
