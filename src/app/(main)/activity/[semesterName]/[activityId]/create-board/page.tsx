@@ -21,6 +21,8 @@ const CreateBoardPage = ({ params }: CreateBoardPageParams) => {
     Number(params.activityId),
   )
 
+  if (!currentActivity) return <div>loading...</div>
+
   return (
     <div className="w-full pt-10">
       <CreateBoardHero />

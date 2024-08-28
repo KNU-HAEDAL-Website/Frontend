@@ -17,7 +17,6 @@ const ActivityErrorFallback = ({
     (DATA_ERROR_MESSAGES.ACTIVITY_NOT_FOUND ||
       DATA_ERROR_MESSAGES.BOARD_DETAIL_NOT_FOUND)
   ) {
-    resetErrorBoundary()
     return (
       <div className="flex flex-col items-center gap-6 pt-40">
         <div>{error?.message} </div>

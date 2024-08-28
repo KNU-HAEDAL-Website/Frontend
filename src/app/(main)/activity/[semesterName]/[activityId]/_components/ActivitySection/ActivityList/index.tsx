@@ -6,12 +6,12 @@ import { Activity } from '@/types/activity'
 
 interface ActivityListProps {
   activities: Activity[]
-  currentActivity: Activity
+  currentActivityId: number
 }
 
 export const ActivityList = ({
   activities,
-  currentActivity,
+  currentActivityId,
 }: ActivityListProps) => {
   const pathName = usePathname()
   const basePath = pathName.split('/').slice(0, -1).join('/')
@@ -24,7 +24,7 @@ export const ActivityList = ({
           href={`${basePath}/${activity.activityId}`}
         >
           <ActiveButton
-            isActive={currentActivity?.activityId === activity.activityId}
+            isActive={currentActivityId === activity.activityId}
             className="h-3 rounded-full p-4"
           >
             {activity.activityName}
