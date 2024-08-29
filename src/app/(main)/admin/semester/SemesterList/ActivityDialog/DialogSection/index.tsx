@@ -4,6 +4,7 @@ import { useGetActivities } from '@/service/data/activity'
 import { Semester } from '@/types/activity'
 
 import { ActivityList } from './ActivityList'
+import { AddActivityForm } from './AddActivityForm'
 
 type ActivityDialogSectionProps = {
   semester: Semester
@@ -18,7 +19,7 @@ export const ActivityDialogSection = ({
 
   return (
     <div className="flex flex-col gap-4">
-      추가하기
+      <AddActivityForm semesterId={semester.semesterId} />
       <ActivityList semesterId={semester.semesterId} activities={activities} />
     </div>
   )
