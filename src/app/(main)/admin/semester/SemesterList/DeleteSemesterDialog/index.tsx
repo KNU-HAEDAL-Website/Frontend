@@ -66,6 +66,7 @@ export const DeleteSemesterDialog = ({
           </ToastAction>
         ),
       })
+      return
     }
 
     if (result.data?.message) {
