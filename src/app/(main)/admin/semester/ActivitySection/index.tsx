@@ -15,7 +15,7 @@ import { ActivityContent } from './ActivityContent'
 export const ActivitySection = () => {
   const { semesters, status } = useGetSemesters()
 
-  if (status === 'pending') return <div>loading...</div>
+  if (status === 'pending') return <div className="px-20">loading...</div>
 
   return (
     <AdminLayout title="활동 관리">
