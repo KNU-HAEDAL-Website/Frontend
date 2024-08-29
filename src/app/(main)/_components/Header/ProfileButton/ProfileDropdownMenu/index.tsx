@@ -1,5 +1,6 @@
 'use client'
 
+import { GearIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 
 import {
@@ -8,11 +9,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useMyInfoStore } from '@/store/myInfo'
 
 import { UserAvatar } from '../UserAvatar'
 import { LogoutButton } from './LogoutButton'
 
 export const ProfileDropdownMenu = () => {
+  const { role } = useMyInfoStore((state) => state.getMyInfo())
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -20,9 +24,14 @@ export const ProfileDropdownMenu = () => {
         {/* <UserAvatar userImage={userImageUrl} /> */}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mt-4">
-        <DropdownMenuItem asChild>
-          <Link href="/mypage">마이페이지</Link>
-        </DropdownMenuItem>
+        {role === '해구르르' && (
+          <DropdownMenuItem>
+            <Link href={'/admin/member'} className="flex items-center gap-2">
+              <GearIcon />
+              <div>관리자</div>
+            </Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem>
           <LogoutButton />
         </DropdownMenuItem>
