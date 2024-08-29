@@ -1,11 +1,11 @@
-import { AdminLayout } from '~admin/_components/AdminLayout'
+import { SectionWithTitle } from '~admin/_components/SectionWithTitle'
 
 import { AddSemesterDialog } from './AddSemesterDialog'
 import { SemesterList } from './SemesterList'
 
 export const SemesterSection = () => {
   return (
-    <AdminLayout title="학기 관리">
+    <SectionWithTitle title="학기 관리">
       <div className="flex flex-row gap-2">
         <div className="h-9 w-9">
           <AddSemesterDialog />
@@ -14,6 +14,6 @@ export const SemesterSection = () => {
           <SemesterList />
         </div>
       </div>
-    </AdminLayout>
+    </SectionWithTitle>
   )
 }

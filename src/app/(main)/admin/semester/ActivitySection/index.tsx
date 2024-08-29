@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/accordion'
 import { useGetSemesters } from '@/service/data/semester'
 
-import { AdminLayout } from '~admin/_components/AdminLayout'
+import { SectionWithTitle } from '~admin/_components/SectionWithTitle'
 
 import { ActivityContent } from './ActivityContent'
 
@@ -18,7 +18,7 @@ export const ActivitySection = () => {
   if (status === 'pending') return <div className="px-20">loading...</div>
 
   return (
-    <AdminLayout title="활동 관리">
+    <SectionWithTitle title="활동 관리">
       <Accordion type="single" collapsible className="w-full">
         {semesters.map((semester) => (
           <AccordionItem
@@ -34,6 +34,6 @@ export const ActivitySection = () => {
           </AccordionItem>
         ))}
       </Accordion>
-    </AdminLayout>
+    </SectionWithTitle>
   )
 }

@@ -5,9 +5,9 @@ import { SemesterSection } from './SemesterSection'
 
 const AdminSemesterPage = () => {
   return (
-    <div className="w-full">
+    <div className="flex w-full flex-col items-center">
       <SemesterSection />
-      <div className="px-20">
+      <div className="px-6">
         <Separator className="mb-4 mt-10" />
       </div>
       <ActivitySection />
