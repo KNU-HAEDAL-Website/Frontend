@@ -91,7 +91,7 @@ export const AddActivityForm = ({ semesterId }: AddActivityFormProps) => {
             control={form.control}
             name="activityName"
             render={({ field }) => (
-              <FormItem className="w-full">
+              <FormItem className="w-80">
                 <FormLabel>활동 추가하기</FormLabel>
                 <FormControl>
                   <Input {...field} placeholder="부트캠프" />

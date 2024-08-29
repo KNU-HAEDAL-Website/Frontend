@@ -6,19 +6,17 @@ import { Semester } from '@/types/activity'
 import { ActivityList } from './ActivityList'
 import { AddActivityForm } from './AddActivityForm'
 
-type ActivityDialogSectionProps = {
+type ActivityContentProps = {
   semester: Semester
 }
 
-export const ActivityDialogSection = ({
-  semester,
-}: ActivityDialogSectionProps) => {
+export const ActivityContent = ({ semester }: ActivityContentProps) => {
   const { data: activities, status } = useGetActivities(semester.semesterId)
 
   if (status === 'pending') return <ActivitySkeleton />
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 px-4">
       <AddActivityForm semesterId={semester.semesterId} />
       <ActivityList semesterId={semester.semesterId} activities={activities} />
     </div>
