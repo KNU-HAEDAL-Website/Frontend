@@ -1,6 +1,6 @@
 'use client'
 
-import { queryOptions, useQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { queryOptions, useQuery } from '@tanstack/react-query'
 
 import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
 import { getActivities } from '@/service/server/activity'
@@ -13,11 +13,13 @@ export const activitiesQuery = (semesterId: number) =>
   })
 
 export const useGetActivities = (semesterId: number) => {
-  return useSuspenseQuery(activitiesQuery(semesterId))
+  return useQuery(activitiesQuery(semesterId))
 }
 
 export const useCurrentActivity = (semesterId: number, activityId: number) => {
-  const { data: activities } = useQuery(activitiesQuery(semesterId))
+  const { data: activities, status } = useGetActivities(semesterId)
+
+  if (status === 'pending') return undefined
 
   const currentActivity = activities?.find(
     (activity) => activity.activityId === activityId,
