@@ -23,7 +23,7 @@ const PostContentFieldEditor = () => {
           <BlockNoteView
             editor={editor}
             onChange={() => field.onChange(JSON.stringify(editor.document))}
-            className="h-96 overflow-auto rounded-md border pt-4"
+            className="h-[500px] overflow-auto rounded-md border pt-4"
           />
           <div className="flex justify-end">
             <FormMessage />

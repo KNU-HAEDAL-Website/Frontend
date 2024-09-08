@@ -30,7 +30,7 @@ export type CreatePost = z.infer<typeof CreatePostSchema>
 
 export const CreateActivityPostSchema = CreatePostSchema.extend({
   boardId: z.number(),
-})
+}).omit({ imageFile: true })
 
 export type CreateActivityPost = z.infer<typeof CreateActivityPostSchema>
 

@@ -1,4 +1,4 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 import {
   getActivityPostsPaging,
@@ -19,9 +19,9 @@ export const useGetActivityPostsPaging = ({
   size = 10,
 }: ActivityPostParams) => {
   return useQuery({
-    queryKey: ['posts', boardId, page],
+    queryKey: ['posts', 'ACTIVITY', boardId, page],
     queryFn: () => getActivityPostsPaging({ boardId, page, size }),
-    placeholderData: keepPreviousData,
+    refetchOnMount: true,
   })
 }
 
@@ -39,7 +39,7 @@ export const useGetPostsPaging = ({
   return useQuery({
     queryKey: ['posts', postType, page],
     queryFn: () => getPostsPaging({ postType, page, size }),
-    placeholderData: keepPreviousData,
+    refetchOnMount: true,
   })
 }
 

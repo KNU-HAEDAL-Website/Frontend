@@ -29,29 +29,20 @@ const CreatePostServerSchema = z.object({
 
 const CreateActivityPostServerSchema = CreatePostServerSchema.extend({
   boardId: z.number(),
-})
+}).omit({ imageFile: true })
 
 export const createActivityPostAction = actionClient
   .schema(CreateActivityPostServerSchema)
   .action(
     async ({
-      parsedInput: { boardId, postTitle, postContent, imageFile, activityDate },
+      parsedInput: { boardId, postTitle, postContent, activityDate },
     }) => {
       try {
-        const { preSignedUrl, imageUrl } = await generatePresignedUrl()
-
-        await BACKEND_API.put(preSignedUrl, imageFile, {
-          headers: {
-            'Content-Type': imageFile.type,
-          },
-        })
-
         if (!activityDate.start) throw new Error('날짜 입력 에러')
 
         const createActivityPostRequest: CreatePostRequest = {
           postTitle,
           postContent,
-          postImageUrl: imageUrl,
           postActivityStartDate: kstFormat(activityDate.start, 'yyyy-MM-dd'),
           postActivityEndDate:
             activityDate.end && kstFormat(activityDate.end, 'yyyy-MM-dd'),

@@ -26,5 +26,4 @@ export const boardDetailQuery = (activityId: number, boardId: number) =>
   queryOptions({
     queryKey: ['board', activityId, boardId],
     queryFn: async () => getBoardDetail({ activityId, boardId }),
-    staleTime: 1000 * 60,
   })
