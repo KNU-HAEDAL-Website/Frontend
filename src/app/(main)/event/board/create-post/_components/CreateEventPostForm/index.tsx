@@ -10,6 +10,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { CreatePostForm } from '@/components/CreatePostForm'
 import { useToast } from '@/components/ui/use-toast'
 import { CreatePost, CreatePostSchema } from '@/schema/post'
+import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { createEventPostAction } from '@/service/server/post/create-post'
 
 export const CreateEventPostForm = () => {
@@ -44,6 +45,8 @@ export const CreateEventPostForm = () => {
         title: result.data.message,
         duration: 3000,
       })
+
+      queryClient.invalidateQueries({ queryKey: ['posts', 'EVENT'] })
       router.push(basePath)
       return
     }
@@ -57,7 +60,7 @@ export const CreateEventPostForm = () => {
   }, [result, basePath, router, toast])
 
   return (
-    <CreatePostForm<CreatePost>
+    <CreatePostForm
       form={form}
       onSubmit={(values) => createPost(values)}
       isExecuting={isExecuting}

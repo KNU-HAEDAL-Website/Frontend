@@ -10,6 +10,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { CreatePostForm } from '@/components/CreatePostForm'
 import { useToast } from '@/components/ui/use-toast'
 import { CreateNoticePost, CreateNoticePostSchema } from '@/schema/post'
+import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { createNoticePostAction } from '@/service/server/post/create-post'
 
 export const CreateNoticePostForm = () => {
@@ -39,6 +40,8 @@ export const CreateNoticePostForm = () => {
         title: result.data.message,
         duration: 3000,
       })
+
+      queryClient.invalidateQueries({ queryKey: ['posts', 'NOTICE'] })
       router.push(basePath)
       return
     }

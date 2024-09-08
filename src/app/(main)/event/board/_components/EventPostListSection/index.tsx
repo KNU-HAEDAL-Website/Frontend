@@ -1,17 +1,14 @@
 'use client'
 
-import { Suspense, useEffect } from 'react'
-
 import { useSearchParams } from 'next/navigation'
 
 import { PaginationButtons } from '@/components/PaginationButtons'
 import { PostTable } from '@/components/PostTable'
+import { Spinner } from '@/components/Spinner'
 import { DATA_ERROR_MESSAGES } from '@/constant/errorMessage'
-import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { useGetPostsPaging } from '@/service/data/post'
-import { getPostsPaging } from '@/service/server/post'
 
-const EventPostListSectionContent = () => {
+export const EventPostListSection = () => {
   const postType = 'EVENT'
 
   const searchParams = useSearchParams()
@@ -20,22 +17,17 @@ const EventPostListSectionContent = () => {
   const page =
     Number(params.get('page')) > 0 ? Number(params.get('page')) - 1 : 0
 
-  const { data, status, isPlaceholderData } = useGetPostsPaging({
+  const { data, status } = useGetPostsPaging({
     postType,
     page,
   })
 
-  useEffect(() => {
-    if (!isPlaceholderData && data?.nextPageToken) {
-      queryClient.prefetchQuery({
-        queryKey: ['posts', postType, page],
-        queryFn: () => getPostsPaging({ postType, page }),
-      })
-    }
-  }, [data, isPlaceholderData, page])
-
   if (status === 'pending')
-    return <div className="flex w-full justify-center">loading...</div>
+    return (
+      <div className="flex w-full justify-center">
+        <Spinner />
+      </div>
+    )
 
   if (!data) {
     throw new Error(DATA_ERROR_MESSAGES.POST_NOT_FOUND)
@@ -63,15 +55,5 @@ const EventPostListSectionContent = () => {
       />
       <PaginationButtons data={data} />
     </div>
-  )
-}
-
-export const EventPostListSection = () => {
-  return (
-    <Suspense
-      fallback={<div className="flex w-full justify-center">로딩 중...</div>}
-    >
-      <EventPostListSectionContent />
-    </Suspense>
   )
 }
