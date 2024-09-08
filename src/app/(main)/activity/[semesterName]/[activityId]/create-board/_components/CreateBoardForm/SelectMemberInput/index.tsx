@@ -19,7 +19,8 @@ export const SelectMemberInput = ({
 }: SelectMemberInputProps) => {
   const { users, status } = useGetUsers()
 
-  if (status === 'pending') return <Skeleton className="h-8 w-full" />
+  if (status === 'pending')
+    return <Skeleton className="h-8 w-full bg-slate-50" />
   if (!users) return <div>유저가 없습니다.</div>
 
   return (

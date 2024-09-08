@@ -6,6 +6,7 @@ import { useCurrentSemester } from '@/service/data/semester'
 import { CreateBoardDetail } from './_components/CreateBoardDetail'
 import { CreateBoardForm } from './_components/CreateBoardForm'
 import { CreateBoardHero } from './_components/CreateBoardHero'
+import { CreateBoardSkeleton } from './_components/Skeleton'
 
 type CreateBoardPageParams = {
   params: {
@@ -21,7 +22,7 @@ const CreateBoardPage = ({ params }: CreateBoardPageParams) => {
     Number(params.activityId),
   )
 
-  if (!currentActivity) return <div>loading...</div>
+  if (!currentActivity) return <CreateBoardSkeleton />
 
   return (
     <div className="w-full pt-10">
