@@ -71,7 +71,7 @@ export const CreateActivityPostForm = ({
   }, [result, basePath, boardId, router, toast])
 
   return (
-    <CreatePostForm<CreateActivityPost>
+    <CreatePostForm
       form={form}
       onSubmit={(values) => createPost(values)}
       isExecuting={isExecuting}

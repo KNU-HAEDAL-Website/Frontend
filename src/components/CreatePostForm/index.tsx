@@ -7,13 +7,17 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
+import { Skeleton } from '@/components/ui/skeleton'
 
 import { PostFormField } from './PostFormField'
 import { ActivityDateFieldDialog } from './PostFormField/ActivityDateFieldDialog'
 
 const PostContentFieldEditor = dynamic(
   () => import('./PostFormField/PostContentFieldEditor'),
-  { ssr: false },
+  {
+    ssr: false,
+    loading: () => <Skeleton className="h-96 w-full bg-slate-100" />,
+  },
 )
 
 type CreatePostFormProps<T extends FieldValues> = {
