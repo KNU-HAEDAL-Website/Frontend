@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { Cross2Icon } from '@radix-ui/react-icons'
 import { Command as CommandPrimitive } from 'cmdk'
@@ -19,21 +19,14 @@ type MultipleMemberSelectProps = {
   options: User[]
   value: User[]
   onChange: (value: User[]) => void
-  updateField: (value: string[]) => void
 }
 
 export const MultipleMemberSelect = ({
   options,
   value,
   onChange,
-  updateField,
 }: MultipleMemberSelectProps) => {
   const [isOpen, setIsOpen] = useState(false)
-
-  useEffect(() => {
-    const field = value.map((member) => member.userId)
-    updateField(field)
-  }, [value, updateField])
 
   const selectMember = (member: User) => {
     if (value.includes(member)) {

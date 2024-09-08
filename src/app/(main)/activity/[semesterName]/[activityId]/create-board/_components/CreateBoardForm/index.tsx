@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -17,8 +17,9 @@ import { useToast } from '@/components/ui/use-toast'
 import { CreateBoard, CreateBoardSchema } from '@/schema/board'
 import { queryClient } from '@/service/components/ReactQueryClientProvider'
 import { createBoardAction } from '@/service/server/board/create-board'
+import { User } from '@/types/user'
 
-import { SelectMemberField } from './SelectMemberField'
+import { SelectMemberInput } from './SelectMemberInput'
 
 type CreateBoardFromProps = {
   activityId: number
@@ -47,6 +48,7 @@ export const CreateBoardForm = ({ activityId }: CreateBoardFromProps) => {
       participants: [],
     },
   })
+  const [selectedMember, setSelectedMember] = useState<User[]>([])
 
   useEffect(() => {
     if (result.data?.isSuccess) {
@@ -83,9 +85,26 @@ export const CreateBoardForm = ({ activityId }: CreateBoardFromProps) => {
         <BoardFormField name="imageFile" label="게시판 대표 사진">
           {(field) => <ImageInput field={field} />}
         </BoardFormField>
-        <SelectMemberField name="participants" label="게시판 이용자" />
+        <BoardFormField name="participants" label="게시판 이용자">
+          {(field) => (
+            <SelectMemberInput
+              {...field}
+              selectedMember={selectedMember}
+              setSelectedMember={setSelectedMember}
+            />
+          )}
+        </BoardFormField>
         <div className="flex justify-end">
-          <Button type="submit" disabled={isExecuting}>
+          <Button
+            type="submit"
+            disabled={isExecuting}
+            onClick={() =>
+              form.setValue(
+                'participants',
+                selectedMember.map((member) => member.userId),
+              )
+            }
+          >
             게시판 생성하기
           </Button>
         </div>
