@@ -16,7 +16,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
     if (role !== '해구르르') {
       router.replace('/')
     }
-  }, [role])
+  }, [role, router])
 
   return (
     <div className="flex h-full w-full flex-1">
