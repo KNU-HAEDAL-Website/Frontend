@@ -10,6 +10,7 @@ import {
 import { useCurrentSemester, useGetSemesters } from '@/service/data/semester'
 import { Semester } from '@/types/activity'
 
+import { SemesterSkeleton } from '../../../_components/SemesterSkeleton'
 import { SemesterButton } from './SemesterButton'
 
 type SemesterSectionProps = {
@@ -19,6 +20,8 @@ type SemesterSectionProps = {
 export const SemesterSection = ({ semesterName }: SemesterSectionProps) => {
   const { semesters } = useGetSemesters()
   const currentSemester = useCurrentSemester(semesterName)
+
+  if (!currentSemester) return <SemesterSkeleton />
 
   const previousIndex = Math.max((currentSemester.index ?? 0) - 1, 0)
   const nextIndex = Math.min(

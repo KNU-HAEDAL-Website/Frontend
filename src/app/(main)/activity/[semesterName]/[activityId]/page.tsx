@@ -2,6 +2,7 @@
 
 import { useCurrentSemester } from '@/service/data/semester'
 
+import { SemesterSkeleton } from '../_components/SemesterSkeleton'
 import { ActivitySection } from './_components/ActivitySection'
 import { BoardSection } from './_components/BoardSection'
 import { CreateBoardButton } from './_components/CreateBoardButton'
@@ -16,6 +17,8 @@ type ActivityPageParams = {
 
 const ActivityPage = ({ params }: ActivityPageParams) => {
   const semester = useCurrentSemester(params.semesterName)
+
+  if (!semester) return <SemesterSkeleton />
 
   return (
     <div className="flex flex-col items-center gap-2">

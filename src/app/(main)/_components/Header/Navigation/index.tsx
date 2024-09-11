@@ -15,7 +15,7 @@ export const Navigation = () => {
 export const navigationLinks = [
   {
     name: 'Activity',
-    href: '/activity',
+    href: '/activity/init',
   },
   {
     name: 'Event',
