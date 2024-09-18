@@ -5,6 +5,8 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useGetActivities } from '@/service/data/activity'
 import { Semester } from '@/types/activity'
 
+import { ActivitySkeleton } from '../../../_components/ActivitySkeleton'
+
 type RedirectActivityProps = {
   semester: Semester
 }
@@ -22,5 +24,9 @@ export const RedirectActivity = ({ semester }: RedirectActivityProps) => {
     }
   }, [activities, pathName, router])
 
-  return <div>활동이 없습니다.</div>
+  if (activities && activities.length === 0) {
+    return <div>활동이 없습니다.</div>
+  }
+
+  return <ActivitySkeleton />
 }
