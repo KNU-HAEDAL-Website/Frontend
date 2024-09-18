@@ -3,10 +3,11 @@
 import dynamic from 'next/dynamic'
 
 import { BoardNavigationButton } from '@/components/PostView/BoardNavigationButton'
-import { PostDetail } from '@/components/PostView/PostDetail'
 import { Spinner } from '@/components/Spinner'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useGetPost } from '@/service/data/post'
+
+import { EventPostDetail } from './EventPostDetail'
 
 type EventPostSectionProps = {
   postId: number
@@ -31,7 +32,7 @@ export const EventPostSection = ({ postId }: EventPostSectionProps) => {
 
   return (
     <div>
-      <PostDetail post={post} />
+      <EventPostDetail post={post} />
       <PostContent content={post.postContent} />
       <BoardNavigationButton />
     </div>

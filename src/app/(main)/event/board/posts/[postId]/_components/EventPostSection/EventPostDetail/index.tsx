@@ -13,11 +13,11 @@ import { deletePostAction } from '@/service/server/post/delete-post'
 import { useMyInfoStore } from '@/store/myInfo'
 import { PostView } from '@/types/post'
 
-type NoticePostDetailProps = {
+type EventPostDetailProps = {
   post: PostView
 }
 
-export const NoticePostDetail = ({ post }: NoticePostDetailProps) => {
+export const EventPostDetail = ({ post }: EventPostDetailProps) => {
   const { role } = useMyInfoStore((state) => state.getMyInfo())
 
   const {
@@ -36,8 +36,8 @@ export const NoticePostDetail = ({ post }: NoticePostDetailProps) => {
         duration: 2000,
       })
 
-      queryClient.invalidateQueries({ queryKey: ['posts', 'NOTICE'] })
-      router.push('/notice')
+      queryClient.invalidateQueries({ queryKey: ['posts', 'EVENT'] })
+      router.push('/event/board')
       return
     }
 
@@ -65,24 +65,31 @@ export const NoticePostDetail = ({ post }: NoticePostDetailProps) => {
 
   return (
     <div className="flex flex-col gap-3 py-4 text-primary">
-      <div className="py-4 text-2xl font-semibold">{post.postTitle}</div>
-      <div className="flex items-center justify-between gap-2 text-sm">
-        <div className="font-semibold">{post.userName}</div>
-        <div className="flex gap-2">
+      <div className="pt-4 text-4xl font-semibold">{post.postTitle}</div>
+      <div className="flex justify-end">
+        {role === '해구르르' && (
+          <Button
+            onClick={() => deletePost({ postId: post.postId })}
+            disabled={isExecuting}
+            variant="link"
+            className="h-fit p-0 text-primary/60 hover:text-primary"
+          >
+            삭제하기
+          </Button>
+        )}
+      </div>
+      <div className="flex flex-col items-start gap-1 text-sm sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex items-center gap-2">
+          <div className="font-semibold">{post.userName}</div>
+          <div>·</div>
           <div className="text-primary/60">
             {format(new Date(post.postCreateDate), 'yyyy-MM-dd')}
           </div>
           <div className="text-primary/60">조회 {post.postViews}</div>
-          {role === '해구르르' && (
-            <Button
-              onClick={() => deletePost({ postId: post.postId })}
-              disabled={isExecuting}
-              variant="link"
-              className="h-fit p-0 text-primary/60 hover:text-primary"
-            >
-              삭제하기
-            </Button>
-          )}
+        </div>
+        <div className="flex">
+          <div>활동일 {post.postActivityStartDate}</div>
+          {post.postActivityEndDate && <div>~{post.postActivityEndDate}</div>}
         </div>
       </div>
       <Separator />

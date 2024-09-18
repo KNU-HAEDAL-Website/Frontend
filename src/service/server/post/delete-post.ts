@@ -9,7 +9,7 @@ const DeletePostServerSchema = z.object({
   postId: z.number(),
 })
 
-export const deleteNoticePostAction = actionClient
+export const deletePostAction = actionClient
   .schema(DeletePostServerSchema)
   .action(async ({ parsedInput: { postId } }) => {
     try {
