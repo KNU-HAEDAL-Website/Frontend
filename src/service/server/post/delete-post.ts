@@ -27,3 +27,28 @@ export const deletePostAction = actionClient
       return { message: API_ERROR_MESSAGES.UNKNOWN_ERROR }
     }
   })
+
+const DeleteActivityPostServerSchema = DeletePostServerSchema.extend({
+  boardId: z.number(),
+})
+
+export const deleteActivityPostAction = actionClient
+  .schema(DeleteActivityPostServerSchema)
+  .action(async ({ parsedInput: { boardId, postId } }) => {
+    try {
+      const response = await AUTHORIZATION_API.delete(
+        `/boards/${boardId}/posts/${postId}`,
+      )
+
+      return { isSuccess: true, message: response.data.message }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const response = error.response
+
+        if (response?.status === 404) {
+          return { message: response.data.message, action: 'login' }
+        }
+      }
+      return { message: API_ERROR_MESSAGES.UNKNOWN_ERROR }
+    }
+  })

@@ -18,7 +18,10 @@ const PostPage = ({ params }: PostPageParams) => {
         activityId={Number(params.activityId)}
         boardId={Number(params.boardId)}
       />
-      <ActivityPostSection postId={Number(params.postId)} />
+      <ActivityPostSection
+        boardId={Number(params.boardId)}
+        postId={Number(params.postId)}
+      />
     </div>
   )
 }

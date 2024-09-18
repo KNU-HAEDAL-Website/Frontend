@@ -3,8 +3,9 @@
 import dynamic from 'next/dynamic'
 
 import { BoardNavigationButton } from '@/components/PostView/BoardNavigationButton'
-import { PostDetail } from '@/components/PostView/PostDetail'
 import { useGetPost } from '@/service/data/post'
+
+import { ActivityPostDetail } from './ActivityPostDetail'
 
 const PostContent = dynamic(() => import('@/components/PostView/PostContent'), {
   ssr: false,
@@ -12,10 +13,14 @@ const PostContent = dynamic(() => import('@/components/PostView/PostContent'), {
 })
 
 type ActivityPostSectionProps = {
+  boardId: number
   postId: number
 }
 
-export const ActivityPostSection = ({ postId }: ActivityPostSectionProps) => {
+export const ActivityPostSection = ({
+  boardId,
+  postId,
+}: ActivityPostSectionProps) => {
   const { data: post, status } = useGetPost({ postId })
 
   if (status === 'pending') return <div>loading...</div>
@@ -24,7 +29,7 @@ export const ActivityPostSection = ({ postId }: ActivityPostSectionProps) => {
 
   return (
     <div>
-      <PostDetail post={post} />
+      <ActivityPostDetail boardId={boardId} post={post} />
       <PostContent content={post.postContent} />
       <BoardNavigationButton />
     </div>
