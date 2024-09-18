@@ -2,8 +2,9 @@
 
 import { BoardNavigationButton } from '@/components/PostView/BoardNavigationButton'
 import PostContent from '@/components/PostView/PostContent'
-import { NoticePostDetail } from '@/components/PostView/PostDetail'
 import { useGetPost } from '@/service/data/post'
+
+import { NoticePostDetail } from './NoticePostDetail'
 
 type NoticePostSectionProps = {
   postId: number
