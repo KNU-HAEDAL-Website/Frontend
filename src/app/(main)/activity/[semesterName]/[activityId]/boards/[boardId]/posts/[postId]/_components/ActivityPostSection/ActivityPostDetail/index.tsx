@@ -22,7 +22,7 @@ export const ActivityPostDetail = ({
   boardId,
   post,
 }: ActivityPostDetailProps) => {
-  const { role } = useMyInfoStore((state) => state.getMyInfo())
+  const { userName } = useMyInfoStore((state) => state.getMyInfo())
 
   const {
     execute: deletePost,
@@ -73,7 +73,7 @@ export const ActivityPostDetail = ({
     <div className="flex flex-col gap-3 py-4 text-primary">
       <div className="pt-4 text-4xl font-semibold">{post.postTitle}</div>
       <div className="flex justify-end">
-        {role === '해구르르' && (
+        {userName === post.userName && (
           <Button
             onClick={() =>
               deletePost({ boardId: boardId, postId: post.postId })
